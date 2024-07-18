@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="powerSourceContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.PowerSourceController">
+   <center>
+      <ScrollPane fx:id="scrollContainer" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #0A2647;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="CENTER" prefHeight="898.0" prefWidth="723.0" style="-fx-background-color: #0A2647;">
+               <children>
+                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--title" text="POWER SOURCE">
+                     <VBox.margin>
+                        <Insets bottom="64.0" top="64.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Group>
+                     <children>
+                        <FlowPane fx:id="contentContainer" alignment="CENTER" columnHalignment="CENTER" prefHeight="769.0" prefWidth="525.0" style="-fx-background-color: #0A2647;">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="32.0">
+                                 <children>
+                                    <Text fx:id="capacity" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Capacity:" />
+                                    <Text fx:id="powerUsageRate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Power usage rate:" />
+                                    <Text fx:id="deviceName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Device name:" />
+                                    <Text fx:id="temperature" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Temperature:" />
+                                    <Text fx:id="amperage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Amperage:" />
+                                    <Text fx:id="timeRemaining" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Time remaining:" />
+                                    <Text fx:id="voltage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Voltage:" />
+                                    <Text fx:id="manufacturer" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Manufacturer:" />
+                                 </children>
+                              </VBox>
+                              <Group>
+                                 <children>
+                                    <Rectangle fx:id="batteryFill" arcHeight="5.0" arcWidth="5.0" fill="#1eff00" height="118.0" stroke="BLACK" strokeType="INSIDE" width="103.0" x="37.0" y="94.0" />
+                                    <Text fx:id="batteryUse" layoutX="110.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="50%" wrappingWidth="85.8499984741211" />
+                                    <ImageView fitHeight="305.0" fitWidth="313.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/baterryIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Group>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

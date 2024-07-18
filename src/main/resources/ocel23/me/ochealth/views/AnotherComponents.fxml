@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="anotherCControllers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.AnotherComponentsController">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="CENTER" prefHeight="947.0" prefWidth="798.0" style="-fx-background-color: #0A2647;">
+               <children>
+                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--title" text="ANOTHER COMPONENTS">
+                     <VBox.margin>
+                        <Insets bottom="64.0" top="64.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Group>
+                     <children>
+                        <FlowPane fx:id="contentContainer" alignment="CENTER" columnHalignment="CENTER" hgap="64.0" prefHeight="485.0" prefWidth="377.0" style="-fx-background-color: #0A2647;" vgap="64.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="149.0" spacing="16.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--subtitle--info--content--text" text="Firmware:" />
+                                    <Text fx:id="firmwareName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Name:" />
+                                    <Text fx:id="firmwareDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Description:" />
+                                    <Text fx:id="firmwareManufacturer" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Manufacturer:" />
+                                    <Text fx:id="firmwareReleaseDate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Release date:" />
+                                    <Text fx:id="firmwareVersion" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Version:" />
+                                 </children>
+                              </VBox>
+                              <ImageView fitHeight="285.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/anotherComponents.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text fx:id="soundCardName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Name:" />
+                                    <Text fx:id="soundCardDriverV" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Driver version:" />
+                                    <Text fx:id="soundCardCodec" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--content--text" text="Codec:" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

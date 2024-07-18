@@ -1,0 +1,82 @@
+another:
+  title: "DALŠÍ KOMPONENTY"
+  firmware:
+    name: "Název:"
+    description: "Popis:"
+    manufacturer: "Výrobce:"
+    releaseDate: "Datum vydání:"
+    version: "Verze:"
+  soundCard:
+    subtitle: "Zvuková karta:"
+    name: "Název:"
+    driverVersion: "Verze ovladače:"
+    codec: "Kodek:"
+powerSource:
+  title: "BATERIE"
+  capacity: "Kapacita:"
+  powerUsageRate: "Míra spotřeby energie:"
+  name: "Název zařízení:"
+  temperature: "Teplota:"
+  amperage: "Proud:"
+  timeRemaining: "Zbývajicí čas:"
+  voltage: "Napětí:"
+  manufacturer: "Výrobce:"
+devices:
+  title: "ZAŘÍZENÍ"
+  parentName: "Rodičovské jméno:"
+  childName: "Jméno potomka:"
+networkInfo:
+  title: "INFORMACE O SÍŤI"
+  ipv4address: "Ipv4 adresa:"
+  ipv4gateway: "Ipv4 brána:"
+  ipv6address: "Ivp6 adresa:"
+  ipv6gateway: "Ivp6 brána:"
+  macAddress: "Mac adresa:"
+  _interface: "Rozhraní:"
+  speed: "Rychlost:"
+  dnsServers: "DNS servery:"
+networkUse:
+  title: "VYUŽITÍ SÍTĚ"
+softwareUse:
+  title: "VYUŽITÍ SOFTWARU"
+  name: "Jméno"
+  processor: "Procesor"
+  memory: "Paměť"
+  state: "Stav"
+hardwareInfo:
+  title: "INFORMACE O HARDWARU"
+  navbar:
+    processor: "Procesor"
+    graphicCard: "Grafická karta"
+    memory: "Paměť"
+  content:
+    cpu:
+      family: "Rodina:"
+      name: "Název:"
+      vendor: "Prodejce:"
+      frequency: "Frekvence:"
+      coreCount: "Počet jader:"
+    gpu:
+      name: "Název:"
+      vendor: "Prodejce:"
+      version: "Verze:"
+    ram:
+      totalMemory: "Celková paměť:"
+      virtualMemory: "Virtuální paměť:"
+      physicalMemoryCount: "Počet fyzické paměti:"
+      typesOfMemories: "Typy pamětí:"
+hardwareUse:
+  title: "VYUŽITÍ HARDWARU"
+  storage: "Uložiště:"
+home:
+  description1: "aplikace pro zobrazení informací o hardwaru a softwaru s cílem informovat klienta více o jeho zařízení."
+  description2: "Obsahuje nespočet funkcí. Pokročilé informace o hardwaru a softwaru, testy, grafy, statistiky..."
+  footerText: "Aplikaci vytvořil Ocel23"
+sidebar:
+  home: "Domů"
+  network: "Síť"
+  devices: "Zařízení"
+  powerSource: "Baterie"
+  another: "Další"
+  settings: "Nastavení"
+#dodělat překlad nastavení

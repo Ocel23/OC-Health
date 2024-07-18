@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane fx:id="softwareUseContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SoftwareUseController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="softwareTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="software--use--title" text="USE">
+               <VBox.margin>
+                  <Insets bottom="72.0" />
+               </VBox.margin>
+            </Text>
+            <Group>
+               <children>
+                  <ScrollPane fx:id="scrollContainer" prefHeight="483.0" prefWidth="452.0" style="-fx-background-color: #0A2647;">
+                     <content>
+                        <TableView fx:id="table" prefHeight="468.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" styleClass="software--use--table">
+                          <columns>
+                            <TableColumn fx:id="nameColumn" editable="false" prefWidth="150.0" sortable="false" text="Name" />
+                            <TableColumn fx:id="cpuColumn" editable="false" prefWidth="150.0" sortable="false" text="Processor" />
+                              <TableColumn fx:id="memoryColumn" editable="false" prefWidth="150.0" sortable="false" text="Memory" />
+                              <TableColumn fx:id="stateColumn" editable="false" minWidth="0.0" prefWidth="150.0" sortable="false" text="State" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Group>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

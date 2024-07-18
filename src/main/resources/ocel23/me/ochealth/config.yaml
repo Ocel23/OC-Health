@@ -1,0 +1,6 @@
+defaultSectionOnStart: Home
+collectStatisticData: true
+collectStatisticsDataInterval: "1 minute"
+showNotificationOnWarningValues: true
+language: Czech
+enableLogging: true

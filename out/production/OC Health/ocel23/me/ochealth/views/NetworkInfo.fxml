@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="networkInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.NetworkInfoController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--title" text="INFO">
+               <VBox.margin>
+                  <Insets bottom="48.0" />
+               </VBox.margin>
+            </Text>
+            <Group>
+               <children>
+                  <HBox fx:id="contentContainer" spacing="100.0">
+                     <children>
+                        <ScrollPane fx:id="scrollContainer" prefHeight="535.0" prefWidth="447.0" style="-fx-background-color: #0A2647;">
+                           <content>
+                              <VBox fx:id="contentContainer" prefHeight="533.0" prefWidth="445.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                 <children>
+                                    <Text fx:id="ipv4Address" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Ipv4 address:" />
+                                    <Text fx:id="ipv4Gateway" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Ipv4 gateway:" />
+                                    <Text fx:id="ipv6Address" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Ipv6 address:" />
+                                    <Text fx:id="ipv6Gateway" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Ipv6 gateway:" />
+                                    <Text fx:id="macAddress" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Mac address:" />
+                                    <Text fx:id="interface1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Interface:" />
+                                    <Text fx:id="speed" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="Speed:" />
+                                    <Text fx:id="dns" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="network--info--content--text" text="DNS servers:" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+               </children>
+            </Group>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

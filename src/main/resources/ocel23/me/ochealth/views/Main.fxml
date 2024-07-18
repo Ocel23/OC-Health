@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainContainer" prefHeight="980.0" prefWidth="800.0" styleClass="main--bg" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.MainController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="980.0" prefWidth="572.0" styleClass="main--content" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane>
+               <children>
+                  <Rectangle fx:id="tittleBg" arcHeight="25.0" arcWidth="25.0" fill="#144272" height="142.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="403.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main--content--text" text="OC HEALTH" textAlignment="CENTER" wrappingWidth="331.427734375" />
+               </children>
+            </StackPane>
+            <Text fx:id="firstContentArticle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main---content--subtitle" text="an application to display information about hardware and software in order to inform the client more about his device." textAlignment="CENTER" wrappingWidth="331.197265625" VBox.vgrow="ALWAYS" />
+            <Text fx:id="secondContentArticle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main---content--subtitle" text="It contains countless features. Advanced hardware and software information, tests, graphs, statistics.." textAlignment="CENTER" wrappingWidth="329.00390625" VBox.vgrow="ALWAYS" />
+            <Text fx:id="bottomText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main--content--text--footer" text="App was build by Ocel23" textAlignment="CENTER" wrappingWidth="387.7832946777344" VBox.vgrow="ALWAYS" />
+            <Rectangle fx:id="bottomLine" arcHeight="5.0" arcWidth="5.0" fill="#144272" height="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="403.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

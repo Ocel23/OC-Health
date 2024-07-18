@@ -1,0 +1,315 @@
+
+body {
+    -fx-font-family: "Poppins";
+}
+
+.main--bg {
+    -fx-background-color: #0A2647;
+}
+
+.main--sidebar--item > .content {
+    -fx-background-color: #144272;
+    -fx-border-width: 0;
+}
+
+
+.main--sidebar--item--option {
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 28px;
+}
+
+.main--sidebar--item--options {
+     -fx-spacing: 18px;
+}
+
+.main--sidebar--item:expanded > .content {
+    -fx-background-color: #0A2647;
+}
+
+.main--sidebar--item > .title {
+    -fx-background-color: #144272;
+    -fx-padding: 12px 0 12px 0;
+}
+
+.main--sidebar--item {
+    -fx-alignment: center;
+    -fx-font-family: "Poppins Medium";
+}
+
+.main--sidebar--item:expanded > .title {
+    -fx-background-color: #859CB4;
+    -fx-background-radius: 12px;
+    -fx-padding: 12px 0 12px 0;
+}
+
+.main--sidebar--item > .title > .text {
+    -fx-fill: white;
+    -fx-font-size: 35px;
+}
+
+.main--sidebar--item > .title > .arrow-button {
+    visibility: false;
+}
+
+.main--sidebar {
+    -fx-border-width: 0 2px 0 0;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+}
+
+.navbar {
+    -fx-border-width: 0 0 4px 0;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+}
+
+.navbar--text {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.main--content {
+    -fx-spacing: 32px;
+    -fx-padding: 16px 0 16px 0;
+    -fx-background-color: #0A2647;
+}
+
+.main--content--text--bg {
+    -fx-background-radius: 25px;
+}
+
+.main--content--text {
+    -fx-font-weight: 700;
+    -fx-fill: white;
+    -fx-font-size: 48.83px;
+}
+
+.main---content--subtitle {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.main--content--text--footer {
+    -fx-fill: white;
+    -fx-font-size: 20px;
+}
+
+.use--content {
+    -fx-background-color: #0A2647;
+}
+
+.use--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.use--cpu--usage--text, .use--use--title {
+    -fx-font-size: 35px;
+    -fx-fill: white;
+}
+
+.use--usage--value {
+    -fx-font-size: 20px;
+    -fx-fill: #bfbfbf;
+}
+
+.use--usage--text {
+    -fx-font-size: 20px;
+    -fx-fill: white;
+}
+
+.use--disk--title {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.hardware--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.hardware--info--tab .tab-header-area  .tab-header-background {
+    -fx-background-color: none;
+}
+
+.hardware--info--tab .tab-header-area  .control-buttons-tab  .tab-down-button {
+    visibility: false;
+}
+
+.hardware--info--tab .tab-header-area  .control-buttons-tab  .tab-down-button  .arrow {
+    visibility: false;
+}
+
+.hardware--info--tab  .tab-header-area .tab {
+    -fx-background-color: #144272;
+    -fx-background-radius: 10px;
+}
+
+.hardware--info--tab  .tab-header-area .tab:selected {
+    -fx-background-color: #859CB4;
+    -fx-background-radius: 10px;
+}
+
+.hardware--info--tab  .tab-header-area .tab .tab-label {
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+}
+
+.hardware--info--tab--content {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.hardware--info--scroll-pane .scroll-bar .track{
+    -fx-background-color: #144272
+}
+
+.hardware--info--scroll-pane .scroll-bar .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
+.software--use--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.software--use--table .column-header-background .nested-column-header .column-header{
+    -fx-background-color: #859CB4;
+}
+
+.software--use--table .column-header-background {
+    -fx-padding: 15px;
+    -fx-background-color: #859CB4;
+}
+
+.software--use--table .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+    -fx-padding: 15px;
+}
+
+.software--use--table .corner, .software--use--table .column-header-background .filler{
+    -fx-background-color: none;
+}
+
+.software--use--table .table-cell {
+    -fx-background-color: #144272;
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 20px;
+    -fx-padding: 48px 16px 24px 16px;
+    -fx-border-width: 0 0px 2px 0;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-alignment: CENTER;
+}
+
+.software--use--table .virtual-flow .scroll-bar:vertical,
+.software--use--table .virtual-flow .scroll-bar:vertical .track,
+.software--use--table .virtual-flow .scroll-bar:vertical .track-background,
+.software--use--table .virtual-flow .scroll-bar:horizontal,
+.software--use--table .virtual-flow .scroll-bar:horizontal .track,
+.software--use--table .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: #D9D9D9;
+}
+
+.software--use--table .virtual-flow .scroll-bar .increment-button,
+.software--use--table .virtual-flow .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.software--use--table .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: #859CB4;
+}
+
+.software--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.software--info--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.network--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.network--info--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.devices--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.power--source--info--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.power--source--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.another--components--info--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.another--components--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.another--components--subtitle--info--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 39px;
+}
+
+.settings--info--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
+}
+
+.settings--content--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
+
+.settings--privacy--policy--text {
+    -fx-font-size: 20px;
+    -fx-fill: white;
+}
+
+.settings--bugs--text {
+    -fx-font-family: "Poppins Medium";
+    -fx-fill: white;
+    -fx-font-size: 25px;
+}
