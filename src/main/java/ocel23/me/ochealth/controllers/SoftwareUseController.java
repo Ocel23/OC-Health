@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import ocel23.me.ochealth.ConfigHandler;
+import ocel23.me.ochealth.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import ocel23.me.ochealth.models.Process;
 import oshi.SystemInfo;
@@ -71,7 +73,30 @@ public class SoftwareUseController implements Initializable {
         softwareUseContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
             if (newScene != null) {
 
+                LanguageHandler languageHandler = new LanguageHandler();
+
+                ConfigHandler configHandler = new ConfigHandler();
+
+                String language = configHandler.getSettingsFromConfig().getLanguage();
+
                 softwareUseContainer.getScene().setUserData(softwareUseContainer);
+
+                String vName = "Name:";
+                String vCpu = "CPU:";
+                String vMemory = "Memory:";
+                String vState = "State:";
+
+                if (language.equalsIgnoreCase("Czech")) {
+                    vName = languageHandler.getLanguageValues().getSoftwareUse().getName();
+                    vCpu = languageHandler.getLanguageValues().getSoftwareUse().getProcessor();
+                    vMemory = languageHandler.getLanguageValues().getSoftwareUse().getMemory();
+                    vState = languageHandler.getLanguageValues().getSoftwareUse().getState();
+                }
+
+                nameColumn.setText(vName);
+                cpuColumn.setText(vCpu);
+                memoryColumn.setText(vMemory);
+                stateColumn.setText(vState);
 
                 softwareUseContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
                     @Override
@@ -87,42 +112,43 @@ public class SoftwareUseController implements Initializable {
                         }
                     }
                 });
+
+                List<OSProcess> processes = os.getProcesses();
+
+                FileWriter writer;
+
+                try {
+                    writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
+                } catch (IOException | URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    writer.write("[SOFTWARE] Already running " + processes.size() + "processes");
+                    writer.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+                cpuColumn.setCellValueFactory(new PropertyValueFactory<>("cpuUsage"));
+                memoryColumn.setCellValueFactory(new PropertyValueFactory<>("memoryUsage"));
+                stateColumn.setCellValueFactory(new PropertyValueFactory<>("processState"));
+                for (OSProcess process : processes) {
+                    double totalMemory = (double) memory.getTotal() / 1073741824;
+                    totalMemory = (double) Math.round(totalMemory * 100) / 100;
+                    double cpuUsage = process.getProcessCpuLoadCumulative() * 100;
+                    cpuUsage = (double) Math.round(cpuUsage * 100) / 100;
+                    double currentMemory = (double) process.getVirtualSize() / 1073741824;
+                    double ramUsage = (currentMemory / totalMemory) * 100;
+                    ramUsage = (double) Math.round(ramUsage * 100) / 100;
+                    String cpuString = cpuUsage + "%";
+                    String memoryString = ramUsage + "%";
+                    table.getItems().add(new Process(process.getName(), cpuString, memoryString, process.getState()));
+                }
             }
         }));
 
-        List<OSProcess> processes = os.getProcesses();
-
-        FileWriter writer;
-
-        try {
-            writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            writer.write("[SOFTWARE] Already running " + processes.size() + "processes");
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cpuColumn.setCellValueFactory(new PropertyValueFactory<>("cpuUsage"));
-        memoryColumn.setCellValueFactory(new PropertyValueFactory<>("memoryUsage"));
-        stateColumn.setCellValueFactory(new PropertyValueFactory<>("processState"));
-        for (OSProcess process : processes) {
-            double totalMemory = (double) memory.getTotal() / 1073741824;
-            totalMemory = (double) Math.round(totalMemory * 100) / 100;
-            double cpuUsage = process.getProcessCpuLoadCumulative() * 100;
-            cpuUsage = (double) Math.round(cpuUsage * 100) / 100;
-            double currentMemory = (double) process.getVirtualSize() / 1073741824;
-            double ramUsage = (currentMemory / totalMemory) * 100;
-            ramUsage = (double) Math.round(ramUsage * 100) / 100;
-            String cpuString = cpuUsage + "%";
-            String memoryString = ramUsage + "%";
-            table.getItems().add(new Process(process.getName(), cpuString, memoryString, process.getState()));
-        }
 
     }
 }

@@ -27,10 +27,4 @@ public class LanguageHandler {
         InputStream inputStream = getClass().getResourceAsStream("/ocel23/me/ochealth/language.yaml");
         return config.load(inputStream);
     }
-
-    public void setLanguageValues(Settings settings) {
-        config = new Yaml();
-        StringWriter stringWriter = new StringWriter();
-        config.dump(settings, stringWriter);
-    }
 }

@@ -43,6 +43,14 @@ softwareUse:
   processor: "Procesor"
   memory: "Paměť"
   state: "Stav"
+softwareInfo:
+  family: "Rodina"
+  version: "Verze"
+  bitness: "Počet bitů:"
+  manufacturer: "Výrobce:"
+  processCount: "Počet procesů:"
+  isElevated: "Je zvýšená:"
+  desktopCount: "Počet otevřených oken:"
 hardwareInfo:
   title: "INFORMACE O HARDWARU"
   navbar:
@@ -72,6 +80,16 @@ home:
   description1: "aplikace pro zobrazení informací o hardwaru a softwaru s cílem informovat klienta více o jeho zařízení."
   description2: "Obsahuje nespočet funkcí. Pokročilé informace o hardwaru a softwaru, testy, grafy, statistiky..."
   footerText: "Aplikaci vytvořil Ocel23"
+settings:
+  defaultSectionOnStartApp: "Výchozí sekce aplikace při startu:"
+  collectStatisticsData: "Sbírání statistických dat:"
+  collectStatisticDataInterval: "Interval pro sbírání statistických dat:"
+  showNotificationsOnWarningValues: "Zobrazovat notifikace při dosažených varujích hodnot:"
+  exportData: "Exportovat data:"
+  language: "Jazyk:"
+  enableLogging: "Loggování:"
+  collectDataInfo: "Oc Health vaše data neshromažďuje a neukládá a nikde je nezveřejňuje, data jsou uložena pouze na vašem PC."
+  reportBugInfo: "Nahlaste prosím chyby na github.com/ocel23"
 sidebar:
   home: "Domů"
   network: "Síť"

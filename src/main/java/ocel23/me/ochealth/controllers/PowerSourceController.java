@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import ocel23.me.ochealth.ConfigHandler;
+import ocel23.me.ochealth.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
 import oshi.hardware.*;
@@ -84,6 +86,12 @@ public class PowerSourceController implements Initializable {
 
                 powerSourceContainer.getScene().setUserData(powerSourceContainer);
 
+                LanguageHandler languageHandler = new LanguageHandler();
+
+                ConfigHandler configHandler = new ConfigHandler();
+
+                String language = configHandler.getSettingsFromConfig().getLanguage();
+
                 powerSourceContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -107,56 +115,78 @@ public class PowerSourceController implements Initializable {
                         }
                     }
                 });
-            }
-        }));
 
-        List<PowerSource> powerSource = hw.getPowerSources();
+                List<PowerSource> powerSource = hw.getPowerSources();
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                for (PowerSource powerSource1 : powerSource) {
-                    String capacityString = powerSource1.getCurrentCapacity() + "/" + powerSource1.getMaxCapacity() + "mAh";
-                    capacity.setText("Capacity: " + capacityString);
-                    powerUsageRate.setText("Power usage rate: " + powerSource1.getPowerUsageRate() + "mW");
-                    deviceName.setText("Device name: " + powerSource1.getDeviceName());
-                    temperature.setText("Temperature: " + powerSource1.getTemperature() +  "°C");
-                    amperage.setText("Amperage: " + powerSource1.getAmperage() + "mA");
-                    double minutes = powerSource1.getTimeRemainingInstant() / 60;
-                    timeRemaining.setText("Time remaining: " + minutes);
-                    voltage.setText("Voltage: " + powerSource1.getVoltage() + "V");
-                    manufacturer.setText("Manufacturer: " + powerSource1.getManufacturer());
-                    double percents = 100 * ((double) powerSource1.getCurrentCapacity() / powerSource1.getMaxCapacity());
-                    double widthOfFillBattery = 203 * (percents / 100);
-                    batteryUse.setText(percents + "%");
-                    batteryFill.setWidth(widthOfFillBattery);
-                    if (percents > 70) {
-                        batteryFill.setFill(Color.web("#00ff2a"));
-                    } else if (percents < 70 && percents > 40) {
-                        batteryFill.setFill(Color.web("#ffa200"));
-                    } else {
-                        batteryFill.setFill(Color.web("#ff3300"));
-                    }
+                timer.schedule(new TimerTask() {
 
-                    FileWriter writer;
+                    @Override
+                    public void run() {
 
-                    try {
-                        writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-                    } catch (IOException | URISyntaxException e) {
-                        throw new RuntimeException(e);
-                    }
+                        String vCapacity = "Capacity:";
+                        String vPowerUsageRate = "Power usage rate:";
+                        String vDeviceName = "Device name:";
+                        String vTemperature = "Temperature:";
+                        String vAmperage = "Amperage:";
+                        String vTimeRemaining = "Time remaining:";
+                        String vVoltage = "Voltage:";
+                        String vManufacturer = "Manufacturer:";
 
-                    if (percents < 40 && percents != 0) {
-                        try {
-                            writer.write("[POWER SOURCE] Battery has critical low power! Only " + percents + "%");
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        if (language.equalsIgnoreCase("Czech")) {
+                            vCapacity = languageHandler.getLanguageValues().getPowerSource().getCapacity();
+                            vPowerUsageRate = languageHandler.getLanguageValues().getPowerSource().getPowerUsageRate();
+                            vDeviceName = languageHandler.getLanguageValues().getPowerSource().getName();
+                            vTemperature = languageHandler.getLanguageValues().getPowerSource().getTemperature();
+                            vAmperage = languageHandler.getLanguageValues().getPowerSource().getAmperage();
+                            vTimeRemaining = languageHandler.getLanguageValues().getPowerSource().getTimeRemaining();
+                            vVoltage = languageHandler.getLanguageValues().getPowerSource().getVoltage();
+                            vManufacturer = languageHandler.getLanguageValues().getPowerSource().getManufacturer();
+                        }
+
+                        for (PowerSource powerSource1 : powerSource) {
+                            String capacityString = powerSource1.getCurrentCapacity() + "/" + powerSource1.getMaxCapacity() + "mAh";
+                            capacity.setText(vCapacity + " " + capacityString);
+                            powerUsageRate.setText(vPowerUsageRate + " " + powerSource1.getPowerUsageRate() + "mW");
+                            deviceName.setText(vDeviceName + " " + powerSource1.getDeviceName());
+                            temperature.setText(vTemperature + " " + powerSource1.getTemperature() +  "°C");
+                            amperage.setText(vAmperage + " " + powerSource1.getAmperage() + "mA");
+                            double minutes = powerSource1.getTimeRemainingInstant() / 60;
+                            timeRemaining.setText(vTimeRemaining + " " + minutes);
+                            voltage.setText(vVoltage + " " + powerSource1.getVoltage() + "V");
+                            manufacturer.setText(vManufacturer + " " + powerSource1.getManufacturer());
+                            double percents = 100 * ((double) powerSource1.getCurrentCapacity() / powerSource1.getMaxCapacity());
+                            double widthOfFillBattery = 203 * (percents / 100);
+                            batteryUse.setText(percents + "%");
+                            batteryFill.setWidth(widthOfFillBattery);
+                            if (percents > 70) {
+                                batteryFill.setFill(Color.web("#00ff2a"));
+                            } else if (percents < 70 && percents > 40) {
+                                batteryFill.setFill(Color.web("#ffa200"));
+                            } else {
+                                batteryFill.setFill(Color.web("#ff3300"));
+                            }
+
+                            FileWriter writer;
+
+                            try {
+                                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
+                            } catch (IOException | URISyntaxException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            if (percents < 40 && percents != 0) {
+                                try {
+                                    writer.write("[POWER SOURCE] Battery has critical low power! Only " + percents + "%");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+
                         }
                     }
-
-                }
+                }, 0L, 1000L);
             }
-        }, 0L, 1000L);
+        }));
 
 
     }

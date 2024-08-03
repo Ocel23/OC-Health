@@ -307,9 +307,112 @@ body {
     -fx-font-size: 20px;
     -fx-fill: white;
 }
+.settings--combobox--input {
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+.settings--combobox--input .list-cell {
+    -fx-alignment: center;
+    -fx-padding: 0px;
+    -fx-text-fill: #0A2647;
+    -fx-font-size: 20px;
+}
+
+.settings--combobox--input .combo-box-popup .list-view {
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-text-fill: #0A2647;
+    -fx-font-size: 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: #0A2647;
+}
+
+.settings--combobox--input .combo-box-popup .list-cell {
+    -fx-padding: 4px 16px 4px 16px;
+}
+
+.settings--combobox--input .combo-box-popup .list-cell:hover {
+    -fx-background-color: #0A2647;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+.settings--combobox--input .combo-box-popup .list-cell:selected {
+    -fx-background-color: #0A2647;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+.settings--button {
+    -fx-background-color: #144272;
+    -fx-text-fill: white;
+    -fx-padding: 6px 12px 6px 12px;
+    -fx-font-family: "Poppins Medium";
+    -fx-background-radius: 10px;
+    -fx-font-size: 25px;
+}
 
 .settings--bugs--text {
     -fx-font-family: "Poppins Medium";
     -fx-fill: white;
     -fx-font-size: 25px;
+}
+
+.settings--checkbox .box{
+    -fx-pref-height: 23px;
+    -fx-pref-width: 75px;
+    -fx-background-radius: 1024px;
+    -fx-background-color: white;
+    -fx-background-insets: -1;
+    -fx-padding: 0;
+}
+
+.settings--checkbox .box .mark {
+    -fx-background-color: #144272;
+    -fx-padding: 0;
+    -fx-background-insets: 0 26 0 26;
+    -fx-background-radius: 1024px;
+    -fx-translate-x: -24px;
+    -fx-shape: 0;
+}
+.settings--checkbox:selected .box .mark {
+    -fx-translate-x: 24px;
+}
+
+.hardware--statistics--button {
+    -fx-background-color: #144272;
+    -fx-text-fill: white;
+    -fx-padding: 12px 24px 12px 24px;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 25px;
+    -fx-background-radius: 10px;
+}
+
+.hardware--statistics--chart .axis-label{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+.hardware--statistics--chart .chart-title {
+    -fx-text-fill: white;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 25px;
+}
+
+.hardware--statistics--chart .chart-series-area-line  {
+    -fx-stroke: #b33cfd;
+}
+
+.hardware--statistics--chart .chart-series-area-fill {
+    -fx-fill: #b33cfd;
+}
+
+.hardware--statistics--chart .chart-plot-background {
+    -fx-background-color: none;
+}
+
+.hardware--statistics--title {
+    -fx-font-weight: 700;
+    -fx-font-size: 48.83px;
+    -fx-fill: white;
 }

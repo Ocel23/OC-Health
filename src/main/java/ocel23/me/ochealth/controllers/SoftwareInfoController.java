@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import ocel23.me.ochealth.ConfigHandler;
+import ocel23.me.ochealth.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -122,13 +124,37 @@ public class SoftwareInfoController implements Initializable {
             }
         }));
 
-        familyText.setText("Family: " + os.getFamily());
-        versionText.setText("Version: " + os.getVersionInfo());
-        bitnessText.setText("Bitness: " + os.getBitness());
-        manuFacturerText.setText("Manu facturer: " + os.getManufacturer());
-        processCountText.setText("Process count: " + os.getProcessCount());
-        isElevatedText.setText("Is elevated: " + os.isElevated());
-        deskopCountText.setText("Open deskop window count: " + os.getDesktopWindows(true).size());
+        LanguageHandler languageHandler = new LanguageHandler();
+
+        ConfigHandler configHandler = new ConfigHandler();
+
+        String language = configHandler.getSettingsFromConfig().getLanguage();
+
+        String vFamily = "Family:";
+        String vVersion = "Version:";
+        String vBitness = "Bitness:";
+        String vManufacturer = "Manufacturer:";
+        String vProcessCount = "Process count:";
+        String vIsElevated = "Is elevated:";
+        String vDeskopCount = "Open deskop window count:";
+
+        if (language.equalsIgnoreCase("Czech")) {
+            vFamily = languageHandler.getLanguageValues().getSoftwareInfo().getFamily();
+            vVersion = languageHandler.getLanguageValues().getSoftwareInfo().getVersion();
+            vBitness = languageHandler.getLanguageValues().getSoftwareInfo().getBitness();
+            vManufacturer = languageHandler.getLanguageValues().getSoftwareInfo().getManufacturer();
+            vProcessCount = languageHandler.getLanguageValues().getSoftwareInfo().getProcessCount();
+            vIsElevated = languageHandler.getLanguageValues().getSoftwareInfo().getIsElevated();
+            vDeskopCount = languageHandler.getLanguageValues().getSoftwareInfo().getDesktopCount();
+        }
+
+        familyText.setText(vFamily + " " + os.getFamily());
+        versionText.setText(vVersion + " " + os.getVersionInfo());
+        bitnessText.setText(vBitness + " " + os.getBitness());
+        manuFacturerText.setText(vManufacturer + " " + os.getManufacturer());
+        processCountText.setText(vProcessCount + " " + os.getProcessCount());
+        isElevatedText.setText(vIsElevated + " " + os.isElevated());
+        deskopCountText.setText(vDeskopCount + " " + os.getDesktopWindows(true).size());
 
     }
 }

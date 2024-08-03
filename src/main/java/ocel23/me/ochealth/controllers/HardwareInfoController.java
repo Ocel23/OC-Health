@@ -103,29 +103,31 @@ public class HardwareInfoController implements Initializable {
                 String cVendor = "Vendor:";
                 String cFrequency = "Frequency:";
 
-                cCores = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getCoreCount();
-                cFamily = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFamily();
-                cName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getName();
-                cVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getVendor();
-                cFrequency = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFrequency();
-
                 String gVendor = "Vendor:";
                 String gName = "Name:";
                 String gVersion = "Version:";
-                gVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVendor();
-                gName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getName();
-                gVersion = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVersion();
 
                 String mTotal = "Total memory:";
                 String mVirtual = "Virtual memory:";
                 String pMemoryCount = "Physical memory count:";
                 String tOfMemories = "Types of memories:";
-                mTotal = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTotalMemory();
-                mVirtual = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getVirtualMemory();
-                pMemoryCount = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getPhysicalMemoryCount();
-                tOfMemories = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTypesOfMemories();
 
+                if (language.equalsIgnoreCase("Czech")) {
+                    cCores = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getCoreCount();
+                    cFamily = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFamily();
+                    cName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getName();
+                    cVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getVendor();
+                    cFrequency = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFrequency();
 
+                    gVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVendor();
+                    gName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getName();
+                    gVersion = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVersion();
+
+                    mTotal = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTotalMemory();
+                    mVirtual = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getVirtualMemory();
+                    pMemoryCount = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getPhysicalMemoryCount();
+                    tOfMemories = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTypesOfMemories();
+                }
 
                 hardwareInfoContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
                     @Override

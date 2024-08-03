@@ -30,10 +30,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Timer;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class DevicesController implements Initializable {
 
@@ -122,6 +121,57 @@ public class DevicesController implements Initializable {
                         }
                     }
                 });
+
+                String intervalValue = configHandler.getSettingsFromConfig().getCollectStatisticsDataInterval();
+
+                long interval = 0;
+
+                if (intervalValue.equalsIgnoreCase("1  minute")) {
+                    interval = 60000L;
+                } else if (intervalValue.equalsIgnoreCase("5 minutes")) {
+                    interval = 3600000L;
+                } else if (intervalValue.equalsIgnoreCase("15 minutes")) {
+                    interval = 10800000L;
+                } else if (intervalValue.equalsIgnoreCase("30 minutes")) {
+                    interval = 21600000L;
+                } else {
+                    interval = 1000L;
+                }
+
+                if (configHandler.getSettingsFromConfig().isCollectStatisticData()) {
+                    timer.schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            FileWriter writer;
+                            try {
+                                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/statistics.txt").toURI()).toFile());
+                            } catch (IOException | URISyntaxException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            try {
+                                writer.write("[DEVICES] CONNECTED DEVICES" + " (" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            for (UsbDevice usbDevice : hw.getUsbDevices(true)) {
+                                for (UsbDevice usbDevice1 : usbDevice.getConnectedDevices()) {
+                                    for (UsbDevice usbDevice2 : usbDevice1.getConnectedDevices()) {
+                                        for (UsbDevice usbDevice3 : usbDevice2.getConnectedDevices()) {
+                                            try {
+                                                writer.write("[DEVICES] " + usbDevice3.getName() + " is connected (" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }, 0L, interval);
+                }
 
                 for (UsbDevice usbDevice : hw.getUsbDevices(true)) {
                     for (UsbDevice usbDevice1 : usbDevice.getConnectedDevices()) {

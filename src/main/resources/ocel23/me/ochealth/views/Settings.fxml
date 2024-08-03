@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="settingsContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SettingsController">
+<BorderPane fx:id="settingsContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SettingsController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0A2647;" BorderPane.alignment="CENTER">
          <content>
@@ -26,49 +25,49 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Default section on start app: " />
-                              <ComboBox fx:id="defaultSectionInput" prefWidth="150.0" />
+                              <Text fx:id="defaultSectionOnStartApp" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Default section on start app: " />
+                              <ComboBox fx:id="defaultSectionInput" prefHeight="30.0" prefWidth="177.0" promptText="Home" styleClass="settings--combobox--input" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Collect statistics data:" />
-                              <CheckBox fx:id="collectStatisticDataInput" mnemonicParsing="false" />
+                              <Text fx:id="collectStatisticsData" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Collect statistics data:" />
+                              <CheckBox fx:id="collectStatisticDataInput" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="settings--checkbox" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Collect statistics data interval:" />
-                              <ComboBox fx:id="collectStatisticsDataInterval" prefWidth="150.0" />
+                              <Text fx:id="collectStatisticDataInterval" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Collect statistics data interval:" />
+                              <ComboBox fx:id="collectStatisticsDataInterval" prefWidth="150.0" promptText="1 minute" styleClass="settings--combobox--input" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Show notifications on warning values:" />
-                              <CheckBox fx:id="showNotificationsOnWarningValuesInput" mnemonicParsing="false" />
+                              <Text fx:id="showNotificationsOnWarningValues" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Show notifications on warning values:" />
+                              <CheckBox fx:id="showNotificationsOnWarningValuesInput" mnemonicParsing="false" styleClass="settings--checkbox" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Export data:" />
-                              <ChoiceBox prefWidth="150.0" />
-                              <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="118.0" text="Export" />
+                              <Text fx:id="exportData" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Export data:" />
+                              <ComboBox fx:id="exportTypeInput" prefWidth="150.0" promptText="JSON" styleClass="settings--combobox--input" />
+                              <Button fx:id="exportButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" styleClass="settings--button" text="Export" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Language:" />
-                              <ComboBox fx:id="languageInput" prefWidth="150.0" />
+                              <Text fx:id="language" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Language:" />
+                              <ComboBox fx:id="languageInput" prefWidth="150.0" promptText="English" styleClass="settings--combobox--input" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Enable logging:" />
-                              <CheckBox fx:id="enableLoggingInput" mnemonicParsing="false" />
+                              <Text fx:id="enableLogging" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--content--text" text="Enable logging:" />
+                              <CheckBox fx:id="enableLoggingInput" mnemonicParsing="false" selected="true" styleClass="settings--checkbox" />
                            </children>
                         </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--privacy--policy--text" text="Oc Health does not collect and store your data and does not publish it anywhere else, the data is only stored on your PC." textAlignment="CENTER" wrappingWidth="625.73046875" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--bugs--text" text="Please report bugs at github.com/ocel23" />
+                        <Text fx:id="collectDataInfo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--privacy--policy--text" text="Oc Health does not collect and store your data and does not publish it anywhere else, the data is only stored on your PC." textAlignment="CENTER" wrappingWidth="625.73046875" />
+                        <Text fx:id="reportBugInfo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="settings--bugs--text" text="Please report bugs at github.com/ocel23" />
                      </children>
                   </VBox>
                </children>

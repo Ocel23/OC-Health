@@ -5,8 +5,9 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TagInspector;
 
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 
 public class ConfigHandler {
 
@@ -28,7 +29,12 @@ public class ConfigHandler {
 
     public void setSettingsToConfig(Settings settings) {
         config = new Yaml();
-        StringWriter stringWriter = new StringWriter();
-        config.dump(settings, stringWriter);
+        PrintWriter printWriter;
+        try {
+            printWriter = new PrintWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/config.yaml").toURI()).toFile());
+        } catch (FileNotFoundException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        config.dump(settings, printWriter);
     }
 }

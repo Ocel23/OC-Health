@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Accordion fx:id="sidebar" prefHeight="535.0" prefWidth="340.0" styleClass="main--sidebar" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SideBarController">
+<Accordion fx:id="sidebar" prefHeight="535.0" prefWidth="340.0" styleClass="main--sidebar" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SideBarController">
    <panes>
       <TitledPane prefHeight="194.0" prefWidth="338.0" styleClass="main--sidebar--item" text="Home">
          <content>
@@ -22,6 +22,7 @@
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHarwareInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareStatisticsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Statistics" />
                      </children>
                   </VBox>
                </children>

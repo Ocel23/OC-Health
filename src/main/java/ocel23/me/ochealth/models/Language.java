@@ -2,8 +2,11 @@ package ocel23.me.ochealth.models;
 
 
 import ocel23.me.ochealth.models.languageModels.*;
+import ocel23.me.ochealth.models.languageModels.Settings;
 import ocel23.me.ochealth.models.languageModels.another.Another;
 import ocel23.me.ochealth.models.languageModels.hardwareInfo.HardwareInfo;
+import ocel23.me.ochealth.models.languageModels.SoftwareInfo;
+import ocel23.me.ochealth.models.languageModels.SoftwareUse;
 
 public class Language {
 
@@ -13,8 +16,10 @@ public class Language {
     private NetworkInfo networkInfo;
     private NetworkUse networkUse;
     private SoftwareUse softwareUse;
+    private SoftwareInfo softwareInfo;
     private HardwareInfo hardwareInfo;
     private HardwareUse hardwareUse;
+    private Settings settings;
     private Home home;
     private Sidebar sidebar;
 
@@ -66,6 +71,14 @@ public class Language {
         this.softwareUse = softwareUse;
     }
 
+    public SoftwareInfo getSoftwareInfo() {
+        return softwareInfo;
+    }
+
+    public void setSoftwareInfo(SoftwareInfo softwareInfo) {
+        this.softwareInfo = softwareInfo;
+    }
+
     public HardwareInfo getHardwareInfo() {
         return hardwareInfo;
     }
@@ -80,6 +93,14 @@ public class Language {
 
     public void setHardwareUse(HardwareUse hardwareUse) {
         this.hardwareUse = hardwareUse;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 
     public Home getHome() {

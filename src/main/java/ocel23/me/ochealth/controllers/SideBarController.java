@@ -107,6 +107,14 @@ public class SideBarController {
         stage.show();
     }
 
+    public void switchToHardwareStatisticsController(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUseStatistics.fxml"));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public Accordion getSidebar() {
         return sidebar;
     }
