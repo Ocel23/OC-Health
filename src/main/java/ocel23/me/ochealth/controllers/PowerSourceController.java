@@ -1,25 +1,19 @@
 package ocel23.me.ochealth.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
 import oshi.hardware.*;
-import oshi.software.os.OperatingSystem;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -64,54 +58,59 @@ public class PowerSourceController implements Initializable {
     @FXML
     private Text batteryUse;
 
-    private boolean isLoadedBig;
-    private boolean isLoadedSmall;
+    private boolean isLoadedBig = false;
+    private boolean isLoadedSmall = true;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(powerSourceContainer);
-
-        SystemInfo si = new SystemInfo();
-        OperatingSystem os = si.getOperatingSystem();
-        HardwareAbstractionLayer hw = si.getHardware();
-        CentralProcessor cpu = hw.getProcessor();
-        GlobalMemory memory = hw.getMemory();
-        Sensors sensors = hw.getSensors();
-        Timer timer = new Timer();
 
         powerSourceContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
             if (newScene != null) {
 
+                Menu menu = new Menu();
+                menu.create(powerSourceContainer);
+
+                SystemInfo si = new SystemInfo();
+                HardwareAbstractionLayer hw = si.getHardware();
+                Timer timer = new Timer();
+
                 powerSourceContainer.getScene().setUserData(powerSourceContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
-
                 ConfigHandler configHandler = new ConfigHandler();
-
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
-                powerSourceContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                        Scene scene = powerSourceContainer.getScene();
-                        double width = scene.getWidth();
-                        scrollContainer.setPrefWidth(width - 500);
-                        contentContainer.setPrefWidth(scrollContainer.getPrefWidth() - 2);
-                        if (width > 1600) {
-                            isLoadedSmall = false;
-                            if (!isLoadedBig) {
-                                isLoadedBig = true;
-                            }
-                        } else if (width > 1200) {
-                            title.setText("POWER SOURCE");
-                        } else if (width < 1200) {
-                            isLoadedBig = false;
-                            if (!isLoadedSmall) {
-                                title.setText("POWER");
-                                isLoadedSmall = true;
-                            }
+                String vTitle = "POWER SOURCE";
+                if (language.equals("Czech")) {
+                    vTitle = languageHandler.getLanguageValues().getPowerSource().getTitle();
+                }
+
+                String finalVTitle = vTitle;
+
+                String [] text = finalVTitle.split(" ");
+                title.setText(text[0]);
+
+                powerSourceContainer.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
+                    Scene scene = powerSourceContainer.getScene();
+
+                    double width = scene.getWidth();
+                    scrollContainer.setPrefWidth(width - 500);
+                    contentContainer.setPrefWidth(scrollContainer.getPrefWidth() - 2);
+
+                    if (width > 1600) {
+                        isLoadedSmall = false;
+                        if (!isLoadedBig) {
+                            isLoadedBig = true;
+                        }
+                    } else if (width > 1200) {
+                        title.setText(finalVTitle);
+                    } else if (width < 1200) {
+                        isLoadedBig = false;
+                        if (!isLoadedSmall) {
+                            String [] text2 = finalVTitle.split(" ");
+                            title.setText(text2[0]);
+                            isLoadedSmall = true;
                         }
                     }
                 });
@@ -122,72 +121,75 @@ public class PowerSourceController implements Initializable {
 
                     @Override
                     public void run() {
-
-                        String vCapacity = "Capacity:";
-                        String vPowerUsageRate = "Power usage rate:";
-                        String vDeviceName = "Device name:";
-                        String vTemperature = "Temperature:";
-                        String vAmperage = "Amperage:";
-                        String vTimeRemaining = "Time remaining:";
-                        String vVoltage = "Voltage:";
-                        String vManufacturer = "Manufacturer:";
-
-                        if (language.equalsIgnoreCase("Czech")) {
-                            vCapacity = languageHandler.getLanguageValues().getPowerSource().getCapacity();
-                            vPowerUsageRate = languageHandler.getLanguageValues().getPowerSource().getPowerUsageRate();
-                            vDeviceName = languageHandler.getLanguageValues().getPowerSource().getName();
-                            vTemperature = languageHandler.getLanguageValues().getPowerSource().getTemperature();
-                            vAmperage = languageHandler.getLanguageValues().getPowerSource().getAmperage();
-                            vTimeRemaining = languageHandler.getLanguageValues().getPowerSource().getTimeRemaining();
-                            vVoltage = languageHandler.getLanguageValues().getPowerSource().getVoltage();
-                            vManufacturer = languageHandler.getLanguageValues().getPowerSource().getManufacturer();
-                        }
-
-                        for (PowerSource powerSource1 : powerSource) {
-                            String capacityString = powerSource1.getCurrentCapacity() + "/" + powerSource1.getMaxCapacity() + "mAh";
-                            capacity.setText(vCapacity + " " + capacityString);
-                            powerUsageRate.setText(vPowerUsageRate + " " + powerSource1.getPowerUsageRate() + "mW");
-                            deviceName.setText(vDeviceName + " " + powerSource1.getDeviceName());
-                            temperature.setText(vTemperature + " " + powerSource1.getTemperature() +  "°C");
-                            amperage.setText(vAmperage + " " + powerSource1.getAmperage() + "mA");
-                            double minutes = powerSource1.getTimeRemainingInstant() / 60;
-                            timeRemaining.setText(vTimeRemaining + " " + minutes);
-                            voltage.setText(vVoltage + " " + powerSource1.getVoltage() + "V");
-                            manufacturer.setText(vManufacturer + " " + powerSource1.getManufacturer());
-                            double percents = 100 * ((double) powerSource1.getCurrentCapacity() / powerSource1.getMaxCapacity());
-                            double widthOfFillBattery = 203 * (percents / 100);
-                            batteryUse.setText(percents + "%");
-                            batteryFill.setWidth(widthOfFillBattery);
-                            if (percents > 70) {
-                                batteryFill.setFill(Color.web("#00ff2a"));
-                            } else if (percents < 70 && percents > 40) {
-                                batteryFill.setFill(Color.web("#ffa200"));
-                            } else {
-                                batteryFill.setFill(Color.web("#ff3300"));
-                            }
-
-                            FileWriter writer;
-
-                            try {
-                                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-                            } catch (IOException | URISyntaxException e) {
-                                throw new RuntimeException(e);
-                            }
-
-                            if (percents < 40 && percents != 0) {
-                                try {
-                                    writer.write("[POWER SOURCE] Battery has critical low power! Only " + percents + "%");
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-
-                        }
+                        getBatteryData(languageHandler, language, powerSource);
                     }
                 }, 0L, 1000L);
             }
         }));
 
 
+    }
+
+    private void getBatteryData(LanguageHandler languageHandler, String language, List<PowerSource> powerSource) {
+        String vCapacity = "Capacity:";
+        String vPowerUsageRate = "Power usage rate:";
+        String vDeviceName = "Device name:";
+        String vTemperature = "Temperature:";
+        String vAmperage = "Amperage:";
+        String vTimeRemaining = "Time remaining:";
+        String vVoltage = "Voltage:";
+        String vManufacturer = "Manufacturer:";
+
+        if (language.equalsIgnoreCase("Czech")) {
+            vCapacity = languageHandler.getLanguageValues().getPowerSource().getCapacity();
+            vPowerUsageRate = languageHandler.getLanguageValues().getPowerSource().getPowerUsageRate();
+            vDeviceName = languageHandler.getLanguageValues().getPowerSource().getName();
+            vTemperature = languageHandler.getLanguageValues().getPowerSource().getTemperature();
+            vAmperage = languageHandler.getLanguageValues().getPowerSource().getAmperage();
+            vTimeRemaining = languageHandler.getLanguageValues().getPowerSource().getTimeRemaining();
+            vVoltage = languageHandler.getLanguageValues().getPowerSource().getVoltage();
+            vManufacturer = languageHandler.getLanguageValues().getPowerSource().getManufacturer();
+        }
+
+        for (PowerSource powerSource1 : powerSource) {
+            String capacityString = powerSource1.getCurrentCapacity() + "/" + powerSource1.getMaxCapacity() + "mAh";
+            capacity.setText(vCapacity + " " + capacityString);
+            powerUsageRate.setText(vPowerUsageRate + " " + powerSource1.getPowerUsageRate() + "mW");
+            deviceName.setText(vDeviceName + " " + powerSource1.getDeviceName());
+            temperature.setText(vTemperature + " " + powerSource1.getTemperature() +  "°C");
+            amperage.setText(vAmperage + " " + powerSource1.getAmperage() + "mA");
+            double minutes = powerSource1.getTimeRemainingInstant() / 60;
+            timeRemaining.setText(vTimeRemaining + " " + minutes);
+            voltage.setText(vVoltage + " " + powerSource1.getVoltage() + "V");
+            manufacturer.setText(vManufacturer + " " + powerSource1.getManufacturer());
+            double percents = 100 * ((double) powerSource1.getCurrentCapacity() / powerSource1.getMaxCapacity());
+            double widthOfFillBattery = 203 * (percents / 100);
+            batteryUse.setText(percents + "%");
+            batteryFill.setWidth(widthOfFillBattery);
+            if (percents > 70) {
+                batteryFill.setFill(Color.web("#00ff2a"));
+            } else if (percents < 70 && percents > 40) {
+                batteryFill.setFill(Color.web("#ffa200"));
+            } else {
+                batteryFill.setFill(Color.web("#ff3300"));
+            }
+
+            FileWriter writer;
+
+            try {
+                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
+            } catch (IOException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (percents < 40 && percents != 0) {
+                try {
+                    writer.write("[POWER SOURCE] Battery has critical low power! Only " + percents + "%");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
     }
 }

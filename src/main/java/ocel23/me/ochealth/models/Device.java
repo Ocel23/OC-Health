@@ -1,6 +1,6 @@
 package ocel23.me.ochealth.models;
 
-import ocel23.me.ochealth.models.enums.DeviceType;
+import ocel23.me.ochealth.enums.DeviceType;
 
 public class Device {
 

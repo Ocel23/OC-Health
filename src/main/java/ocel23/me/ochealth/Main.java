@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
 
 
 public class Main extends Application {
@@ -26,7 +27,7 @@ public class Main extends Application {
             } else if (section.equalsIgnoreCase("HardwareInfo")){
                 root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareInfo.fxml"));
             } else if (section.equalsIgnoreCase("HardwareUse")) {
-                root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/Use.fxml.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUse.fxml.fxml"));
             } else if (section.equalsIgnoreCase("Another")) {
                 root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/AnotherComponents.fxml"));
             } else if (section.equalsIgnoreCase("NetworkInfo")) {
@@ -53,7 +54,7 @@ public class Main extends Application {
             scene.getStylesheets().add(css);
 
             primaryStage.setMinWidth(800);
-            primaryStage.setMinHeight(980);
+            primaryStage.setMinHeight(800);
 
             primaryStage.setTitle("OC Health");
             primaryStage.setScene(scene);

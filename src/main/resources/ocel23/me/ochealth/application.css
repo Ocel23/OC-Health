@@ -3,15 +3,10 @@ body {
     -fx-font-family: "Poppins";
 }
 
-.main--bg {
-    -fx-background-color: #0A2647;
-}
-
 .main--sidebar--item > .content {
     -fx-background-color: #144272;
     -fx-border-width: 0;
 }
-
 
 .main--sidebar--item--option {
     -fx-text-fill: white;
@@ -21,6 +16,10 @@ body {
 
 .main--sidebar--item--options {
      -fx-spacing: 18px;
+}
+
+.main--sidebar--item .title:hover {
+    -fx-background-color: #859CB4;
 }
 
 .main--sidebar--item:expanded > .content {
@@ -35,11 +34,11 @@ body {
 .main--sidebar--item {
     -fx-alignment: center;
     -fx-font-family: "Poppins Medium";
+    -fx-cursor: HAND;
 }
 
 .main--sidebar--item:expanded > .title {
     -fx-background-color: #859CB4;
-    -fx-background-radius: 12px;
     -fx-padding: 12px 0 12px 0;
 }
 
@@ -97,32 +96,32 @@ body {
     -fx-font-size: 20px;
 }
 
-.use--content {
+.hardware--use--content {
     -fx-background-color: #0A2647;
 }
 
-.use--title {
+.hardware--use--title {
     -fx-font-weight: 700;
     -fx-font-size: 48.83px;
     -fx-fill: white;
 }
 
-.use--cpu--usage--text, .use--use--title {
+.hardware--use--cpu--usage--text, .hardware--use--use--title {
     -fx-font-size: 35px;
     -fx-fill: white;
 }
 
-.use--usage--value {
+.hardware--use--usage--value {
     -fx-font-size: 20px;
     -fx-fill: #bfbfbf;
 }
 
-.use--usage--text {
+.hardware--use--usage--text {
     -fx-font-size: 20px;
     -fx-fill: white;
 }
 
-.use--disk--title {
+.hardware--use--disk--title {
     -fx-font-family: "Poppins Medium";
     -fx-fill: white;
     -fx-font-size: 25px;
@@ -151,10 +150,14 @@ body {
     -fx-background-radius: 10px;
 }
 
+.hardware--info--tab .tab-header-area .tab:hover {
+    -fx-background-color: #859CB4;
+}
 .hardware--info--tab  .tab-header-area .tab:selected {
     -fx-background-color: #859CB4;
     -fx-background-radius: 10px;
 }
+
 
 .hardware--info--tab  .tab-header-area .tab .tab-label {
     -fx-text-fill: white;
@@ -352,6 +355,10 @@ body {
     -fx-font-size: 25px;
 }
 
+.settings--button:hover {
+    -fx-background-color: #859CB4;
+}
+
 .settings--bugs--text {
     -fx-font-family: "Poppins Medium";
     -fx-fill: white;
@@ -373,7 +380,7 @@ body {
     -fx-background-insets: 0 26 0 26;
     -fx-background-radius: 1024px;
     -fx-translate-x: -24px;
-    -fx-shape: 0;
+    -fx-shape: "m 182.18453,144.3869 c 0,43.8376 -34.18359,79.375 -76.35119,79.375 -42.167596,0 -76.351185,-35.5374 -76.351185,-79.375 1e-6,-43.8376 34.18359,-79.374996 76.351185,-79.374998 42.1676,-1e-6 76.35119,35.537398 76.35119,79.374998 z";
 }
 .settings--checkbox:selected .box .mark {
     -fx-translate-x: 24px;
@@ -388,15 +395,25 @@ body {
     -fx-background-radius: 10px;
 }
 
+.hardware--statistics--button:hover {
+    -fx-background-color: #859CB4;
+}
+
 .hardware--statistics--chart .axis-label{
     -fx-text-fill: white;
     -fx-font-size: 20px;
+}
+
+.hardware--statistics--chart {
+    -fx-padding: 24px;
 }
 
 .hardware--statistics--chart .chart-title {
     -fx-text-fill: white;
     -fx-font-family: "Poppins Medium";
     -fx-font-size: 25px;
+    -fx-alignment: center;
+    -fx-padding: 0 0 8px 50px;
 }
 
 .hardware--statistics--chart .chart-series-area-line  {

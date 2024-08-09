@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 
 import java.net.URL;
@@ -19,10 +21,15 @@ public class NetworkUseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(netUseContainer);
+        netUseContainer.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
 
-        networkEmbed.getEngine().load("https://www.metercustom.net/plugin/?hl=en");
+                Menu menu = new Menu();
+                menu.create(netUseContainer);
+
+                networkEmbed.getEngine().load("https://www.metercustom.net/plugin/?hl=en");
+            }
+        });
         
     }
 }

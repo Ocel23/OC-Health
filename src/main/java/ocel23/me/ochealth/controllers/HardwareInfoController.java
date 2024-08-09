@@ -12,8 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -63,7 +63,7 @@ public class HardwareInfoController implements Initializable {
     private Text memoryTypes;
 
     @FXML
-    private Text hardwareTitle;
+    private Text title;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -78,17 +78,19 @@ public class HardwareInfoController implements Initializable {
     private HBox gpuContent;
     @FXML
     private HBox memoryContent;
-    private boolean isLoadedSmall;
-    private boolean isLoadedBig;
+
+    private boolean isLoadedSmall = true;
+    private boolean isLoadedBig = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(hardwareInfoContainer);
-
         hardwareInfoContainer.sceneProperty().addListener((((observableValue, oldScene, newScene) -> {
             if (newScene != null) {
+
+                Menu menu = new Menu();
+                menu.create(hardwareInfoContainer);
+
                 hardwareInfoContainer.getScene().setUserData(hardwareInfoContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
@@ -97,50 +99,60 @@ public class HardwareInfoController implements Initializable {
 
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
-                String cCores = "Cores:";
-                String cFamily = "Family:";
-                String cName = "Name:";
-                String cVendor = "Vendor:";
-                String cFrequency = "Frequency:";
+                String vCpuCores = "Cores:";
+                String vCpuFamily = "Family:";
+                String vCpuName = "Name:";
+                String vCpuVendor = "Vendor:";
+                String vCpuFrequency = "Frequency:";
 
-                String gVendor = "Vendor:";
-                String gName = "Name:";
-                String gVersion = "Version:";
+                String vGpuVendor = "Vendor:";
+                String vGpuName = "Name:";
+                String vGpuVersion = "Version:";
 
-                String mTotal = "Total memory:";
-                String mVirtual = "Virtual memory:";
-                String pMemoryCount = "Physical memory count:";
-                String tOfMemories = "Types of memories:";
+                String vRamTotal = "Total memory:";
+                String vRamVirtual = "Virtual memory:";
+                String vRamPhysicalCount = "Physical memory count:";
+                String vRamTypesOfMemories = "Types of memories:";
+
+                String vTitle = "HARDWARE INFO";
 
                 if (language.equalsIgnoreCase("Czech")) {
-                    cCores = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getCoreCount();
-                    cFamily = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFamily();
-                    cName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getName();
-                    cVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getVendor();
-                    cFrequency = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFrequency();
+                    vTitle = languageHandler.getLanguageValues().getHardwareInfo().getTitle();
+                    vCpuCores = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getCoreCount();
+                    vCpuFamily = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFamily();
+                    vCpuName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getName();
+                    vCpuVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getVendor();
+                    vCpuFrequency = languageHandler.getLanguageValues().getHardwareInfo().getContent().getCpu().getFrequency();
 
-                    gVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVendor();
-                    gName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getName();
-                    gVersion = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVersion();
+                    vGpuVendor = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVendor();
+                    vGpuName = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getName();
+                    vGpuVersion = languageHandler.getLanguageValues().getHardwareInfo().getContent().getGpu().getVersion();
 
-                    mTotal = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTotalMemory();
-                    mVirtual = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getVirtualMemory();
-                    pMemoryCount = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getPhysicalMemoryCount();
-                    tOfMemories = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTypesOfMemories();
+                    vRamTotal = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTotalMemory();
+                    vRamVirtual = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getVirtualMemory();
+                    vRamPhysicalCount = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getPhysicalMemoryCount();
+                    vRamTypesOfMemories = languageHandler.getLanguageValues().getHardwareInfo().getContent().getRam().getTypesOfMemories();
                 }
 
-                hardwareInfoContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+                String finalVTitle = vTitle;
+
+                String [] text2 = vTitle.split(" ");
+                title.setText(text2[0]);
+
+                hardwareInfoContainer.getScene().widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                         Scene scene = hardwareInfoContainer.getScene();
+
                         double width = scene.getWidth();
+
                         if (width > 1600 ) {
                             isLoadedSmall = false;
-                            hardwareTitle.setText("HARDWARE INFO");
+                            title.setText(finalVTitle);
                             if (!isLoadedBig) {
-                                Image image = null;
-                                Image image1 = null;
-                                Image image2 = null;
+                                Image image;
+                                Image image1;
+                                Image image2;
                                 try {
                                     image2 = new Image(getClass().getResource("/ocel23/me/ochealth/images/memoryIcon.png").toURI().toString());
                                     image1 = new Image(getClass().getResource("/ocel23/me/ochealth/images/gpuIcon.png").toURI().toString());
@@ -180,7 +192,8 @@ public class HardwareInfoController implements Initializable {
                         } else if (width < 1200) {
                             isLoadedBig = false;
                             if (!isLoadedSmall) {
-                                hardwareTitle.setText("INFO");
+                                String [] text = finalVTitle.split(" ");
+                                title.setText(text[0]);
                                 tabPane.setPrefWidth(475);
                                 tabPaneLine1.setWidth(384);
                                 tabPaneLine2.setWidth(384);
@@ -204,20 +217,21 @@ public class HardwareInfoController implements Initializable {
                 SystemInfo si = new SystemInfo();
                 CentralProcessor cpu = si.getHardware().getProcessor();
                 CentralProcessor.ProcessorIdentifier processorIdentifier = cpu.getProcessorIdentifier();
-                cpuCore.setText(cCores + " " + cpu.getPhysicalProcessorCount());
-                cpuFamily.setText(cFamily + " " + processorIdentifier.getFamily());
-                cpuName.setText(cName + " " + processorIdentifier.getName());
+
+                cpuCore.setText(vCpuCores + " " + cpu.getPhysicalProcessorCount());
+                cpuFamily.setText(vCpuFamily + " " + processorIdentifier.getFamily());
+                cpuName.setText(vCpuName + " " + processorIdentifier.getName());
                 cpuModel.setText("Model: " + processorIdentifier.getModel());
-                cpuVendor.setText(cVendor + " " + processorIdentifier.getVendor());
+                cpuVendor.setText(vCpuVendor + " " + processorIdentifier.getVendor());
                 double maxFreqConverted = (double) processorIdentifier.getVendorFreq() / 1000000000;
-                cpuFrequency.setText(cFrequency + " " + maxFreqConverted + "GHz");
+                cpuFrequency.setText(vCpuFrequency + " " + maxFreqConverted + "GHz");
 
                 List<GraphicsCard> graphicsCards = si.getHardware().getGraphicsCards();
 
                 for (GraphicsCard gpu : graphicsCards) {
-                    gpuName.setText(gName + " " + gpu.getName());
-                    gpuVendor.setText(gVendor + " " + gpu.getVendor());
-                    gpuVersion.setText(gVersion + " " + gpu.getVersionInfo());
+                    gpuName.setText(vGpuName + " " + gpu.getName());
+                    gpuVendor.setText(vGpuVendor + " " + gpu.getVendor());
+                    gpuVersion.setText(vGpuVersion + " " + gpu.getVersionInfo());
                     double ram = (double) gpu.getVRam() / 1073741824;
                     gpuRam.setText("Ram: " + ram + "GB");
                 }
@@ -234,13 +248,13 @@ public class HardwareInfoController implements Initializable {
 
                 for (PhysicalMemory physicalMemory : memory.getPhysicalMemory()) {
                     count++;
-                    types.append(physicalMemory.getMemoryType() + ",");
+                    types.append(physicalMemory.getMemoryType()).append(",");
                 }
 
-                totalMemory.setText(mTotal + " " + total +"GB");
-                virtualMemory.setText(mVirtual + " " + virtual + "GB");
-                memoryCount.setText(pMemoryCount + " " + count);
-                memoryTypes.setText(tOfMemories + " " + types);
+                totalMemory.setText(vRamTotal + " " + total +"GB");
+                virtualMemory.setText(vRamVirtual + " " + virtual + "GB");
+                memoryCount.setText(vRamPhysicalCount + " " + count);
+                memoryTypes.setText(vRamTypesOfMemories + " " + types);
             }
         })));
 

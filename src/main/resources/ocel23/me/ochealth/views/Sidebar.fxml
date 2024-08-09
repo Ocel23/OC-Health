@@ -3,107 +3,80 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Accordion fx:id="sidebar" prefHeight="535.0" prefWidth="340.0" styleClass="main--sidebar" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SideBarController">
+<Accordion fx:id="sidebar" prefWidth="340.0" styleClass="main--sidebar" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SideBarController">
    <panes>
-      <TitledPane prefHeight="194.0" prefWidth="338.0" styleClass="main--sidebar--item" text="Home">
+      <TitledPane fx:id="home" styleClass="main--sidebar--item" text="Home" />
+      <TitledPane styleClass="main--sidebar--item" text="Hardware">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-         </content>
-      </TitledPane>
-      <TitledPane prefHeight="311.0" prefWidth="338.0" styleClass="main--sidebar--item" text="Hardware">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHarwareInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareStatisticsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Statistics" />
-                     </children>
-                  </VBox>
+                  <Button fx:id="hardwareUse" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
+                  <Button fx:id="hardwareInfo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information" />
+                  <Button fx:id="hardwareStatistics" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHardwareStatisticsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Statistics" />
                </children>
-            </AnchorPane>
+            </VBox>
          </content>
          <font>
             <Font size="46.0" />
          </font>
       </TitledPane>
-      <TitledPane prefHeight="256.0" prefWidth="351.0" styleClass="main--sidebar--item" text="Sotware">
+      <TitledPane styleClass="main--sidebar--item" text="Sotware">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSoftwareUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSoftwareInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="softwareUse" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSoftwareUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
+                  <Button fx:id="softwareInfo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSoftwareInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
-      <TitledPane prefHeight="256.0" prefWidth="381.0" styleClass="main--sidebar--item" text="Network">
+      <TitledPane fx:id="network" styleClass="main--sidebar--item" text="Network">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNetworkUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNetworkInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="networkUse" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNetworkUseScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Use" />
+                  <Button fx:id="networkInfo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNetworkInfoScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
-      <TitledPane styleClass="main--sidebar--item" text="Devices">
+      <TitledPane fx:id="devices" styleClass="main--sidebar--item" text="Devices">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToDevicesScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="devicesInfo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToDevicesScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
-      <TitledPane styleClass="main--sidebar--item" text="Power source">
+      <TitledPane fx:id="powerSource" styleClass="main--sidebar--item" text="Power source">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToPowerSourceScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations and Use" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="powerSourceInfoAndUse" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToPowerSourceScene" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information and Use" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
-      <TitledPane styleClass="main--sidebar--item" text="Another">
+      <TitledPane fx:id="another" styleClass="main--sidebar--item" text="Another">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToAnotherComponentsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Informations" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="anotherInfo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToAnotherComponentsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Information" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
-      <TitledPane prefHeight="199.0" prefWidth="202.0" styleClass="main--sidebar--item" text="Settings">
+      <TitledPane fx:id="settings" styleClass="main--sidebar--item" text="Settings">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
                <children>
-                  <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSettingsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Settings" />
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                  <Button fx:id="subSettings" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToSettingsController" style="-fx-background-color: none;" styleClass="main--sidebar--item--option" text="Settings" />
+               </children>
+            </VBox>
          </content>
       </TitledPane>
    </panes>
