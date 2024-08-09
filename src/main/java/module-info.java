@@ -23,4 +23,7 @@ module ocel23.me.ochealth {
     opens ocel23.me.ochealth.models.statisticsModels.hardwareInfo to com.google.gson;
     exports ocel23.me.ochealth.controllers;
     opens ocel23.me.ochealth.controllers to javafx.fxml;
+    exports ocel23.me.ochealth.fileHandlers;
+    opens ocel23.me.ochealth.fileHandlers to javafx.fxml;
+    exports ocel23.me.ochealth.models.languageModels.sidebar;
 }

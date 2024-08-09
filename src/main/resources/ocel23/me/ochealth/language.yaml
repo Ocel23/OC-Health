@@ -44,13 +44,18 @@ softwareUse:
   memory: "Paměť"
   state: "Stav"
 softwareInfo:
-  family: "Rodina"
-  version: "Verze"
+  title: "SOFTWARE INFORMACE"
+  family: "Rodina:"
+  version: "Verze:"
   bitness: "Počet bitů:"
   manufacturer: "Výrobce:"
   processCount: "Počet procesů:"
   isElevated: "Je zvýšená:"
   desktopCount: "Počet otevřených oken:"
+hardwareStatistics:
+  title: "STATISTIKY HARDWARU"
+  processor: "VYUŽITÍ PROCESORU"
+  memory: "VYUŽITÍ PAMĚTI"
 hardwareInfo:
   title: "INFORMACE O HARDWARU"
   navbar:
@@ -75,12 +80,12 @@ hardwareInfo:
       typesOfMemories: "Typy pamětí:"
 hardwareUse:
   title: "VYUŽITÍ HARDWARU"
-  storage: "Uložiště:"
 home:
   description1: "aplikace pro zobrazení informací o hardwaru a softwaru s cílem informovat klienta více o jeho zařízení."
   description2: "Obsahuje nespočet funkcí. Pokročilé informace o hardwaru a softwaru, testy, grafy, statistiky..."
   footerText: "Aplikaci vytvořil Ocel23"
 settings:
+  title: "NASTAVENÍ"
   defaultSectionOnStartApp: "Výchozí sekce aplikace při startu:"
   collectStatisticsData: "Sbírání statistických dat:"
   collectStatisticDataInterval: "Interval pro sbírání statistických dat:"
@@ -92,9 +97,29 @@ settings:
   reportBugInfo: "Nahlaste prosím chyby na github.com/ocel23"
 sidebar:
   home: "Domů"
-  network: "Síť"
-  devices: "Zařízení"
-  powerSource: "Baterie"
-  another: "Další"
-  settings: "Nastavení"
+  network:
+    title: "Síť"
+    use: "Využití"
+    information: "Informace"
+  software:
+    title: "Software"
+    use: "Využití"
+    information: "Informace"
+  hardware:
+    title: "Hardware"
+    use: "Využití"
+    information: "Informace"
+    statistics: "Statistiky"
+  devices:
+    title: "Zařízení"
+    information: "Informace"
+  powerSource:
+    title: "Baterie"
+    informationAndUse: "Informace a využití"
+  another:
+    title: "Další"
+    information: "Informace"
+  settings:
+    title: "Nastavení"
+    settings: "Nastavení"
 #dodělat překlad nastavení

@@ -9,10 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
 import oshi.hardware.*;
@@ -48,24 +47,24 @@ public class NetworkInfoController implements Initializable {
     @FXML
     private HBox contentContainer;
 
-    private boolean isLoadedSmall;
-    private boolean isLoadedBig;
+    private boolean isLoadedSmall = true;
+    private boolean isLoadedBig = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(networkInfoContainer);
+        networkInfoContainer.sceneProperty().addListener((observableValue, oldScene, newScene) -> {
 
-        SystemInfo si = new SystemInfo();
-        OperatingSystem os = si.getOperatingSystem();
-        HardwareAbstractionLayer hw = si.getHardware();
+            if (newScene != null) {
 
-        networkInfoContainer.sceneProperty().addListener((observableValue, scene, t1) -> {
-
-            if (scene != null) {
+                Menu menu = new Menu();
+                menu.create(networkInfoContainer);
 
                 networkInfoContainer.getScene().setUserData(networkInfoContainer);
+
+                SystemInfo si = new SystemInfo();
+                OperatingSystem os = si.getOperatingSystem();
+                HardwareAbstractionLayer hw = si.getHardware();
 
                 LanguageHandler languageHandler = new LanguageHandler();
 
@@ -73,28 +72,35 @@ public class NetworkInfoController implements Initializable {
 
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
-                String ivp4Add = "Ipv4 address:";
-                String ivp4Gate = "Ipv4 gateway:";
-                String ivp6Add = "Ipv6 address:";
-                String ivp6Gate = "Ipv6 gateway:";
-                String macAdd = "Mac address:";
+                String vIpv4Address = "Ipv4 address:";
+                String vIpv4Gateway = "Ipv4 gateway:";
+                String vIpv6Address = "Ipv6 address:";
+                String vIpv6Gateway = "Ipv6 gateway:";
+                String vMacAddress = "Mac address:";
                 String vInterface = "Interface:";
                 String vSpeed = "Speed:";
                 String vDns = "DNS servers:";
 
+                String vTitle = "NETWORK INFO";
 
                 if (language.equalsIgnoreCase("Czech")) {
-                    ivp4Add = languageHandler.getLanguageValues().getNetworkInfo().getIpv4address();
-                    ivp6Add = languageHandler.getLanguageValues().getNetworkInfo().getIpv6address();
-                    ivp4Gate = languageHandler.getLanguageValues().getNetworkInfo().getIpv4gateway();
-                    ivp6Gate = languageHandler.getLanguageValues().getNetworkInfo().getIpv6gateway();
-                    macAdd = languageHandler.getLanguageValues().getNetworkInfo().getMacAddress();
+                    vTitle = languageHandler.getLanguageValues().getNetworkInfo().getTitle();
+                    vIpv4Address = languageHandler.getLanguageValues().getNetworkInfo().getIpv4address();
+                    vIpv6Address = languageHandler.getLanguageValues().getNetworkInfo().getIpv6address();
+                    vIpv4Gateway = languageHandler.getLanguageValues().getNetworkInfo().getIpv4gateway();
+                    vIpv6Gateway= languageHandler.getLanguageValues().getNetworkInfo().getIpv6gateway();
+                    vMacAddress = languageHandler.getLanguageValues().getNetworkInfo().getMacAddress();
                     vInterface = languageHandler.getLanguageValues().getNetworkInfo().get_interface();
                     vSpeed = languageHandler.getLanguageValues().getNetworkInfo().getSpeed();
                     vDns = languageHandler.getLanguageValues().getNetworkInfo().getDnsServers();
                 }
 
-                networkInfoContainer.widthProperty().addListener(new ChangeListener<Number>() {
+                String finalVTitle = vTitle;
+
+                String [] text = finalVTitle.split(" ");
+                title.setText(text[0]);
+
+                networkInfoContainer.widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                         Scene scene = networkInfoContainer.getScene();
@@ -103,7 +109,7 @@ public class NetworkInfoController implements Initializable {
                         if (width > 1600) {
                             isLoadedSmall = false;
                             if (!isLoadedBig) {
-                                Image image = null;
+                                Image image;
                                 try {
                                     image = new Image(getClass().getResource("/ocel23/me/ochealth/images/networkIcon.png").toURI().toString());
                                 } catch (URISyntaxException e) {
@@ -116,36 +122,37 @@ public class NetworkInfoController implements Initializable {
                                 isLoadedBig = true;
                             }
                         } else if (width > 1200) {
-                            title.setText("NETWORK INFO");
+                            title.setText(finalVTitle);
                         } else if (width < 1200) {
                             isLoadedBig = false;
                             if (!isLoadedSmall) {
                                 if (contentContainer.getChildren().size() == 2) {
                                     contentContainer.getChildren().remove(1);
                                 }
+                                String [] text = finalVTitle.split(" ");
+                                title.setText(text[0]);
+                                isLoadedSmall = true;
                             }
-                            title.setText("INFO");
-                            isLoadedSmall = true;
                         }
                     }
                 });
 
                 for (NetworkIF networkIF : hw.getNetworkIFs()) {
-                    String ipv4 = "";
+                    StringBuilder ipv4 = new StringBuilder();
                     for (int j = 0; j < networkIF.getIPv4addr().length; j++) {
-                        ipv4 += networkIF.getIPv4addr()[j];
+                        ipv4.append(networkIF.getIPv4addr()[j]);
                         if (j == networkIF.getIPv4addr().length - 1) continue;
-                        ipv4 += ",";
+                        ipv4.append(",");
                     }
-                    ipv4Address.setText(ivp4Add + " " + ipv4);
+                    ipv4Address.setText(vIpv4Address + " " + ipv4);
 
-                    String ipv6 = "";
+                    StringBuilder ipv6 = new StringBuilder();
                     for (int k = 0; k < networkIF.getIPv6addr().length; k++) {
-                        ipv6 += networkIF.getIPv6addr()[k];
+                        ipv6.append(networkIF.getIPv6addr()[k]);
                         if (k == networkIF.getIPv6addr().length - 1) continue;
-                        ipv6 += ",";
+                        ipv6.append(",");
                     }
-                    ipv6Address.setText(ivp6Add + " " + ipv6);
+                    ipv6Address.setText(vIpv6Address + " " + ipv6);
 
                     double speed2 = (double) networkIF.getSpeed() / 1000000;
                     speed2 = Math.floor(speed2 * 100) / 100;
@@ -153,21 +160,21 @@ public class NetworkInfoController implements Initializable {
 
                     interface1.setText(vInterface + " " + networkIF.getName());
 
-                    macAddress.setText(macAdd + " " + networkIF.getMacaddr());
+                    macAddress.setText(vMacAddress + " " + networkIF.getMacaddr());
 
                 }
 
-                String dnsServers = "";
+                StringBuilder dnsServers = new StringBuilder();
 
                 for (int i = 0; i < os.getNetworkParams().getDnsServers().length; i++) {
-                    dnsServers += os.getNetworkParams().getDnsServers()[i];
+                    dnsServers.append(os.getNetworkParams().getDnsServers()[i]);
                     if (i == os.getNetworkParams().getDnsServers().length - 1) continue;
-                    dnsServers += ",";
+                    dnsServers.append(",");
                 }
 
                 dns.setText(vDns + " " + dnsServers);
 
-                ipv4Gateway.setText(ivp4Gate + " " + os.getNetworkParams().getIpv4DefaultGateway());
+                ipv4Gateway.setText(vIpv4Gateway + " " + os.getNetworkParams().getIpv4DefaultGateway());
 
                 String ipv6Gateway2 = os.getNetworkParams().getIpv6DefaultGateway();
 
@@ -175,7 +182,7 @@ public class NetworkInfoController implements Initializable {
                     ipv6Gateway2 = "None";
                 }
 
-                ipv6Gateway.setText(ivp6Gate + " " + ipv6Gateway2);
+                ipv6Gateway.setText(vIpv6Gateway + " " + ipv6Gateway2);
             }
 
 

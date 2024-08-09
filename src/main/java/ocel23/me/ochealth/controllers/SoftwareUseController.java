@@ -1,7 +1,5 @@
 package ocel23.me.ochealth.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -11,15 +9,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import ocel23.me.ochealth.models.Process;
 import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.hardware.Sensors;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 
@@ -30,8 +26,6 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SoftwareUseController implements Initializable {
 
@@ -54,24 +48,21 @@ public class SoftwareUseController implements Initializable {
     private ScrollPane scrollContainer;
 
     @FXML
-    private Text softwareTitle;
+    private Text title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(softwareUseContainer);
-
-        SystemInfo si = new SystemInfo();
-        OperatingSystem os = si.getOperatingSystem();
-        HardwareAbstractionLayer hw = si.getHardware();
-        CentralProcessor cpu = hw.getProcessor();
-        GlobalMemory memory = hw.getMemory();
-        Sensors sensors = hw.getSensors();
-        Timer timer = new Timer();
-
         softwareUseContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
             if (newScene != null) {
+
+                Menu menu = new Menu();
+                menu.create(softwareUseContainer);
+
+                SystemInfo si = new SystemInfo();
+                OperatingSystem os = si.getOperatingSystem();
+                HardwareAbstractionLayer hw = si.getHardware();
+                GlobalMemory memory = hw.getMemory();
 
                 LanguageHandler languageHandler = new LanguageHandler();
 
@@ -85,8 +76,10 @@ public class SoftwareUseController implements Initializable {
                 String vCpu = "CPU:";
                 String vMemory = "Memory:";
                 String vState = "State:";
+                String vTitle = "SOFTWARE USE";
 
                 if (language.equalsIgnoreCase("Czech")) {
+                    vTitle = languageHandler.getLanguageValues().getSoftwareInfo().getTitle();
                     vName = languageHandler.getLanguageValues().getSoftwareUse().getName();
                     vCpu = languageHandler.getLanguageValues().getSoftwareUse().getProcessor();
                     vMemory = languageHandler.getLanguageValues().getSoftwareUse().getMemory();
@@ -98,18 +91,21 @@ public class SoftwareUseController implements Initializable {
                 memoryColumn.setText(vMemory);
                 stateColumn.setText(vState);
 
-                softwareUseContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                        Scene scene = softwareUseContainer.getScene();
-                        double width = scene.getWidth();
-                        scrollContainer.setPrefWidth(width - 500);
-                        table.setPrefWidth(width - 700 + 500);
-                        if (width > 1200) {
-                            softwareTitle.setText("SOFTWARE USE");
-                        } else if (width < 1200) {
-                            softwareTitle.setText("USE");
-                        }
+                String [] text2 = vTitle.split(" ");
+                title.setText(text2[0]);
+
+                String finalVTitle = vTitle;
+                softwareUseContainer.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
+                    Scene scene = softwareUseContainer.getScene();
+                    double width = scene.getWidth();
+
+                    scrollContainer.setPrefWidth(width - 500);
+                    table.setPrefWidth(width - 700 + 500);
+                    if (width > 1200) {
+                        title.setText(finalVTitle);
+                    } else if (width < 1200) {
+                        String [] text = finalVTitle.split(" ");
+                        title.setText(text[0]);
                     }
                 });
 

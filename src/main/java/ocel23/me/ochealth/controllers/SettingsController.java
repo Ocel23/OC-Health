@@ -1,19 +1,19 @@
 package ocel23.me.ochealth.controllers;
 
-import javafx.collections.FXCollections;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
-import ocel23.me.ochealth.StatisticsHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.StatisticsHandler;
 import ocel23.me.ochealth.models.Menu;
 import ocel23.me.ochealth.models.Settings;
 
@@ -66,125 +66,149 @@ public class SettingsController implements Initializable {
     private Button exportButton;
     @FXML
     private ComboBox<String> exportTypeInput;
+    @FXML
+    private Text title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(settingsContainer);
+        settingsContainer.sceneProperty().addListener(new ChangeListener<Scene>() {
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldScene, Scene newScene) {
+                if (newScene != null) {
+                    Menu menu = new Menu();
+                    menu.create(settingsContainer);
 
-        String [] items = {"Home", "Devices", "HardwareInfo"
-                , "HardwareUse", "Another", "NetworkInfo",
-                "NetworkUse", "SoftwareInfo", "SoftwareUse",
-                "PowerSource"
-        };
+                    settingsContainer.getScene().setUserData(settingsContainer);
 
-        LanguageHandler languageHandler = new LanguageHandler();
+                    String [] items = {"Home", "Devices", "HardwareInfo"
+                            , "HardwareUse", "Another", "NetworkInfo",
+                            "NetworkUse", "SoftwareInfo", "SoftwareUse",
+                            "PowerSource"
+                    };
 
-        ConfigHandler configHandler = new ConfigHandler();
+                    LanguageHandler languageHandler = new LanguageHandler();
 
-        String language2 = configHandler.getSettingsFromConfig().getLanguage();
+                    ConfigHandler configHandler = new ConfigHandler();
 
-        String vDefaultSectionOnStartApp = "Default section on start:";
-        String vCollectStatisticsData = "Collect statistics data:";
-        String vCollectStatisticDataInterval = "Collect statistics data interval:";
-        String vShowNotificationsOnWarningValues = "Show notifications on warning values:";
-        String vExportData = "Export data:";
-        String vLanguage = "Language:";
-        String vEnableLogging = "Enable logging:";
-        String vCollectDataInfo = "Oc Health does not collect and store your data and does not publish it anywhere else, the data is only stored on your PC.";
-        String vReportBugInfo = "Please report bugs at github.com/ocel23";
+                    String language2 = configHandler.getSettingsFromConfig().getLanguage();
 
-        if (language2.equalsIgnoreCase("Czech")) {
-            defaultSectionOnStartApp.setText(vDefaultSectionOnStartApp);
-            collectStatisticsData.setText(vCollectStatisticsData);
-            collectStatisticDataInterval.setText(vCollectStatisticDataInterval);
-            showNotificationsOnWarningValues.setText(vShowNotificationsOnWarningValues);
-            exportData.setText(vExportData);
-            language.setText(vLanguage);
-            enableLogging.setText(vEnableLogging);
-            collectDataInfo.setText(vCollectDataInfo);
-            reportBugInfo.setText(vReportBugInfo);
-        }
+                    String vTitle = "SETTINGS";
+                    String vDefaultSectionOnStartApp = "Default section on start:";
+                    String vCollectStatisticsData = "Collect statistics data:";
+                    String vCollectStatisticDataInterval = "Collect statistics data interval:";
+                    String vShowNotificationsOnWarningValues = "Show notifications on warning values:";
+                    String vExportData = "Export data:";
+                    String vLanguage = "Language:";
+                    String vEnableLogging = "Enable logging:";
+                    String vCollectDataInfo = "Oc Health does not collect and store your data and does not publish it anywhere else, the data is only stored on your PC.";
+                    String vReportBugInfo = "Please report bugs at github.com/ocel23";
 
-        Settings settings = new Settings();
+                    if (language2.equalsIgnoreCase("Czech")) {
+                        vTitle = languageHandler.getLanguageValues().getSettings().getTitle();
+                        vDefaultSectionOnStartApp = languageHandler.getLanguageValues().getSettings().getDefaultSectionOnStartApp();
+                        vCollectStatisticsData = languageHandler.getLanguageValues().getSettings().getCollectStatisticsData();
+                        vCollectStatisticDataInterval = languageHandler.getLanguageValues().getSettings().getCollectStatisticDataInterval();
+                        vShowNotificationsOnWarningValues = languageHandler.getLanguageValues().getSettings().getShowNotificationsOnWarningValues();
+                        vExportData = languageHandler.getLanguageValues().getSettings().getExportData();
+                        vLanguage = languageHandler.getLanguageValues().getSettings().getLanguage();
+                        vEnableLogging = languageHandler.getLanguageValues().getSettings().getEnableLogging();
+                        vCollectDataInfo = languageHandler.getLanguageValues().getSettings().getCollectDataInfo();
+                        vReportBugInfo = languageHandler.getLanguageValues().getSettings().getReportBugInfo();
+                    }
 
-        defaultSectionInput.getItems().addAll(items);
+                    defaultSectionOnStartApp.setText(vDefaultSectionOnStartApp);
+                    collectStatisticsData.setText(vCollectStatisticsData);
+                    collectStatisticDataInterval.setText(vCollectStatisticDataInterval);
+                    showNotificationsOnWarningValues.setText(vShowNotificationsOnWarningValues);
+                    exportData.setText(vExportData);
+                    language.setText(vLanguage);
+                    enableLogging.setText(vEnableLogging);
+                    collectDataInfo.setText(vCollectDataInfo);
+                    reportBugInfo.setText(vReportBugInfo);
 
-        defaultSectionInput.setOnAction(event -> {
-            String text = defaultSectionInput.getSelectionModel().getSelectedItem();
-            settings.setDefaultSectionOnStart(text);
-            configHandler.setSettingsToConfig(settings);
-        });
+                    Settings settings = configHandler.getSettingsFromConfig();
 
-        collectStatisticDataInput.setOnAction(event -> {
-            String value = collectStatisticDataInput.getText();
-            settings.setCollectStatisticData(Boolean.parseBoolean(value));
-            configHandler.setSettingsToConfig(settings);
-        });
+                    String [] text4 = vTitle.split(" ");
+                    title.setText(text4[0]);
 
-        String [] items2 = {"1 second", "1 minute", "5 minutes", "15 minutes", "30 minutes"};
+                    defaultSectionInput.getItems().addAll(items);
 
-        collectStatisticsDataInterval.getItems().addAll(items2);
+                    defaultSectionInput.setOnAction(event -> {
+                        String text = defaultSectionInput.getSelectionModel().getSelectedItem();
+                        settings.setDefaultSectionOnStart(text);
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-        collectStatisticsDataInterval.setOnAction(event -> {
-            String text2 = collectStatisticsDataInterval.getSelectionModel().getSelectedItem();
-            settings.setCollectStatisticsDataInterval(text2);
-            configHandler.setSettingsToConfig(settings);
-        });
+                    collectStatisticDataInput.setOnAction(event -> {
+                        String value = collectStatisticDataInput.getText();
+                        settings.setCollectStatisticData(Boolean.parseBoolean(value));
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-        showNotificationsOnWarningValuesInput.setOnAction(event -> {
-            String value2 = showNotificationsOnWarningValuesInput.getText();
-            settings.setShowNotificationOnWarningValues(Boolean.parseBoolean(value2));
-            configHandler.setSettingsToConfig(settings);
-        });
+                    String [] items2 = {"1 second", "1 minute", "5 minutes", "15 minutes", "30 minutes"};
 
-        String [] items3 = {"English", "Czech"};
+                    collectStatisticsDataInterval.getItems().addAll(items2);
 
-        languageInput.getItems().addAll(items3);
+                    collectStatisticsDataInterval.setOnAction(event -> {
+                        String text2 = collectStatisticsDataInterval.getSelectionModel().getSelectedItem();
+                        settings.setCollectStatisticsDataInterval(text2);
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-        languageInput.setOnAction(event -> {
-            String text3 = languageInput.getSelectionModel().getSelectedItem();
-            settings.setLanguage(text3);
-            configHandler.setSettingsToConfig(settings);
-            System.out.println(configHandler.getSettingsFromConfig().getLanguage());
-        });
+                    showNotificationsOnWarningValuesInput.setOnAction(event -> {
+                        String value2 = showNotificationsOnWarningValuesInput.getText();
+                        settings.setShowNotificationOnWarningValues(Boolean.parseBoolean(value2));
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-        enableLoggingInput.setOnAction(event -> {
-            String value3 = enableLoggingInput.getText();
-            settings.setCollectStatisticData(Boolean.parseBoolean(value3));
-            configHandler.setSettingsToConfig(settings);
-        });
+                    String [] items3 = {"English", "Czech"};
 
-        String [] items4 = {"JSON", "YAML", "TEXT"};
+                    languageInput.getItems().addAll(items3);
 
-        exportTypeInput.getItems().addAll(items4);
+                    languageInput.setOnAction(event -> {
+                        String text3 = languageInput.getSelectionModel().getSelectedItem();
+                        settings.setLanguage(text3);
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-        exportButton.setOnAction(event -> {
+                    enableLoggingInput.setOnAction(event -> {
+                        String value3 = enableLoggingInput.getText();
+                        settings.setCollectStatisticData(Boolean.parseBoolean(value3));
+                        configHandler.setSettingsToConfig(settings);
+                    });
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save");
-            String fileType;
-            if (exportTypeInput.getSelectionModel().getSelectedItem().equals("JSON")) {
-                fileType = "*.json";
-            } else if (exportTypeInput.getSelectionModel().getSelectedItem().equals("YAML")) {
-                fileType = "*.yaml";
-            } else {
-                fileType = "*.txt";
+                    String [] items4 = {"JSON", "YAML", "TEXT"};
+
+                    exportTypeInput.getItems().addAll(items4);
+
+
+                    exportButton.setOnAction(event -> {
+
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Save");
+                        String fileType;
+                        if (exportTypeInput.getSelectionModel().getSelectedItem().equals("JSON")) {
+                            fileType = "*.json";
+                        } else if (exportTypeInput.getSelectionModel().getSelectedItem().equals("YAML")) {
+                            fileType = "*.yaml";
+                        } else {
+                            fileType = "*.txt";
+                        }
+                        StatisticsHandler statisticsHandler = new StatisticsHandler();
+                        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("AllFiles ", fileType));
+                        File file = fileChooser.showSaveDialog(exportButton.getScene().getWindow());
+                        String path = file.getAbsolutePath();
+                        if (exportTypeInput.getSelectionModel().getSelectedItem().equals("JSON")) {
+                            statisticsHandler.createJsonDataFile(path);
+                        } else if (exportTypeInput.getSelectionModel().getSelectedItem().equals("YAML")) {
+                            statisticsHandler.createYamlDataFile(path);
+                        } else {
+                            statisticsHandler.createTextDataFile(path);
+                        }
+                    });
+                }
             }
-            StatisticsHandler statisticsHandler = new StatisticsHandler();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("AllFiles ", fileType));
-            File file = fileChooser.showSaveDialog(exportButton.getScene().getWindow());
-            String path = file.getAbsolutePath();
-            if (exportTypeInput.getSelectionModel().getSelectedItem().equals("JSON")) {
-                statisticsHandler.createJsonDataFile(path);
-            } else if (exportTypeInput.getSelectionModel().getSelectedItem().equals("YAML")) {
-                statisticsHandler.createYamlDataFile(path);
-            } else {
-                statisticsHandler.createTextDataFile(path);
-            }
-
-
         });
     }
 }

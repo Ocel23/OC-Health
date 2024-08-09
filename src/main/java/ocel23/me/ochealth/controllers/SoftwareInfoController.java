@@ -11,20 +11,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor;
-import oshi.hardware.GlobalMemory;
-import oshi.hardware.HardwareAbstractionLayer;
-import oshi.hardware.Sensors;
 import oshi.software.os.OperatingSystem;
 
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 public class SoftwareInfoController implements Initializable {
 
@@ -47,46 +42,81 @@ public class SoftwareInfoController implements Initializable {
     private Text deskopCountText;
 
     @FXML
-    private Text softwareTitle;
+    private Text title;
     @FXML
     private ScrollPane scrollContainer;
     @FXML
     private HBox contentContainer;
 
-    private boolean isLoadedSmall;
-    private boolean isLoadedBig;
+    private boolean isLoadedSmall = true;
+    private boolean isLoadedBig = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(infoContainer);
-
-        SystemInfo si = new SystemInfo();
-        OperatingSystem os = si.getOperatingSystem();
-        HardwareAbstractionLayer hw = si.getHardware();
-        CentralProcessor cpu = hw.getProcessor();
-        GlobalMemory memory = hw.getMemory();
-        Sensors sensors = hw.getSensors();
-        Timer timer = new Timer();
 
         infoContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
             if (newScene != null) {
 
+                Menu menu = new Menu();
+                menu.create(infoContainer);
+
+                SystemInfo si = new SystemInfo();
+                OperatingSystem os = si.getOperatingSystem();
+
                 infoContainer.getScene().setUserData(infoContainer);
 
-                infoContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
+                infoContainer.getScene().widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                         Scene scene = infoContainer.getScene();
                         double width = scene.getWidth();
                         scrollContainer.setPrefWidth(width - 400);
                         contentContainer.setPrefWidth(scrollContainer.getPrefWidth() - 2);
+
+
+                        LanguageHandler languageHandler = new LanguageHandler();
+
+                        ConfigHandler configHandler = new ConfigHandler();
+
+                        String language = configHandler.getSettingsFromConfig().getLanguage();
+
+                        String vFamily = "Family:";
+                        String vVersion = "Version:";
+                        String vBitness = "Bitness:";
+                        String vManufacturer = "Manufacturer:";
+                        String vProcessCount = "Process count:";
+                        String vIsElevated = "Is elevated:";
+                        String vDeskopCount = "Open deskop window count:";
+                        String vTitle = "SOFTWARE INFO:";
+
+                        if (language.equalsIgnoreCase("Czech")) {
+                            vTitle = languageHandler.getLanguageValues().getSoftwareInfo().getTitle();
+                            vFamily = languageHandler.getLanguageValues().getSoftwareInfo().getFamily();
+                            vVersion = languageHandler.getLanguageValues().getSoftwareInfo().getVersion();
+                            vBitness = languageHandler.getLanguageValues().getSoftwareInfo().getBitness();
+                            vManufacturer = languageHandler.getLanguageValues().getSoftwareInfo().getManufacturer();
+                            vProcessCount = languageHandler.getLanguageValues().getSoftwareInfo().getProcessCount();
+                            vIsElevated = languageHandler.getLanguageValues().getSoftwareInfo().getIsElevated();
+                            vDeskopCount = languageHandler.getLanguageValues().getSoftwareInfo().getDesktopCount();
+                        }
+
+                        familyText.setText(vFamily + " " + os.getFamily());
+                        versionText.setText(vVersion + " " + os.getVersionInfo());
+                        bitnessText.setText(vBitness + " " + os.getBitness());
+                        manuFacturerText.setText(vManufacturer + " " + os.getManufacturer());
+                        processCountText.setText(vProcessCount + " " + os.getProcessCount());
+                        isElevatedText.setText(vIsElevated + " " + os.isElevated());
+                        deskopCountText.setText(vDeskopCount + " " + os.getDesktopWindows(true).size());
+
+                        String [] text4 = vTitle.split(" ");
+                        title.setText(text4[0]);
+
                         String osFamilyType = os.getFamily();
                         if (width > 1600) {
                             isLoadedSmall = false;
                             if (!isLoadedBig) {
-                                Image image = null;
+                                Image image;
                                 try {
                                     if (osFamilyType.equalsIgnoreCase("Windows")) {
                                         image = new Image(getClass().getResource("/ocel23/me/ochealth/images/windowsIcon.png").toURI().toString());
@@ -108,14 +138,15 @@ public class SoftwareInfoController implements Initializable {
                             }
 
                         } else if (width > 1200) {
-                            softwareTitle.setText("SOFTWARE INFO");
+                            title.setText(vTitle);
                         } else if (width < 1200) {
                             isLoadedBig = false;
                             if (!isLoadedSmall) {
                                 if (contentContainer.getChildren().size() == 2) {
                                     contentContainer.getChildren().remove(1);
                                 }
-                                softwareTitle.setText("INFO");
+                                String [] text = vTitle.split(" ");
+                                title.setText(text[0]);
                                 isLoadedSmall = true;
                             }
                         }
@@ -123,38 +154,6 @@ public class SoftwareInfoController implements Initializable {
                 });
             }
         }));
-
-        LanguageHandler languageHandler = new LanguageHandler();
-
-        ConfigHandler configHandler = new ConfigHandler();
-
-        String language = configHandler.getSettingsFromConfig().getLanguage();
-
-        String vFamily = "Family:";
-        String vVersion = "Version:";
-        String vBitness = "Bitness:";
-        String vManufacturer = "Manufacturer:";
-        String vProcessCount = "Process count:";
-        String vIsElevated = "Is elevated:";
-        String vDeskopCount = "Open deskop window count:";
-
-        if (language.equalsIgnoreCase("Czech")) {
-            vFamily = languageHandler.getLanguageValues().getSoftwareInfo().getFamily();
-            vVersion = languageHandler.getLanguageValues().getSoftwareInfo().getVersion();
-            vBitness = languageHandler.getLanguageValues().getSoftwareInfo().getBitness();
-            vManufacturer = languageHandler.getLanguageValues().getSoftwareInfo().getManufacturer();
-            vProcessCount = languageHandler.getLanguageValues().getSoftwareInfo().getProcessCount();
-            vIsElevated = languageHandler.getLanguageValues().getSoftwareInfo().getIsElevated();
-            vDeskopCount = languageHandler.getLanguageValues().getSoftwareInfo().getDesktopCount();
-        }
-
-        familyText.setText(vFamily + " " + os.getFamily());
-        versionText.setText(vVersion + " " + os.getVersionInfo());
-        bitnessText.setText(vBitness + " " + os.getBitness());
-        manuFacturerText.setText(vManufacturer + " " + os.getManufacturer());
-        processCountText.setText(vProcessCount + " " + os.getProcessCount());
-        isElevatedText.setText(vIsElevated + " " + os.isElevated());
-        deskopCountText.setText(vDeskopCount + " " + os.getDesktopWindows(true).size());
 
     }
 }

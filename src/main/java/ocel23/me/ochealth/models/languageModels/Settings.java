@@ -2,6 +2,7 @@ package ocel23.me.ochealth.models.languageModels;
 
 public class Settings {
 
+    private String title;
     private String defaultSectionOnStartApp;
     private String collectStatisticsData;
     private String collectStatisticDataInterval;
@@ -82,5 +83,13 @@ public class Settings {
 
     public void setReportBugInfo(String reportBugInfo) {
         this.reportBugInfo = reportBugInfo;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

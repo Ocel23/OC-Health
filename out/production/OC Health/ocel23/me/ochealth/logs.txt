@@ -1,1 +1,0 @@
-[HARDWARE] Ram usage is bigger than 80%! (17/07/2024)

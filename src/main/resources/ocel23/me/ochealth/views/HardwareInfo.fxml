@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
+<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
    <center>
       <VBox alignment="CENTER" prefHeight="859.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="hardwareTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--title" text="INFO">
+            <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--title" text="INFO">
                <VBox.margin>
-                  <Insets bottom="48.0" top="48.0" />
+                  <Insets bottom="72.0" />
                </VBox.margin>
             </Text>
             <Group>

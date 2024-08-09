@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="anotherCControllers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.AnotherComponentsController">
+<BorderPane fx:id="anotherContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.AnotherComponentsController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <VBox alignment="CENTER" prefHeight="947.0" prefWidth="798.0" style="-fx-background-color: #0A2647;">
+            <VBox alignment="CENTER" style="-fx-background-color: #0A2647;">
                <children>
-                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--title" text="ANOTHER COMPONENTS">
+                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="another--components--info--title" text="ANOTHER">
                      <VBox.margin>
-                        <Insets bottom="64.0" top="64.0" />
+                        <Insets bottom="72.0" top="72.0" />
                      </VBox.margin>
                   </Text>
                   <Group>

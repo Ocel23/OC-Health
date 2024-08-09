@@ -2,6 +2,7 @@ package ocel23.me.ochealth.models.languageModels;
 
 public class SoftwareInfo {
 
+    private String title;
     private String family;
     private String version;
     private String bitness;
@@ -64,5 +65,13 @@ public class SoftwareInfo {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

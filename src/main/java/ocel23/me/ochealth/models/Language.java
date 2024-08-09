@@ -7,6 +7,7 @@ import ocel23.me.ochealth.models.languageModels.another.Another;
 import ocel23.me.ochealth.models.languageModels.hardwareInfo.HardwareInfo;
 import ocel23.me.ochealth.models.languageModels.SoftwareInfo;
 import ocel23.me.ochealth.models.languageModels.SoftwareUse;
+import ocel23.me.ochealth.models.languageModels.sidebar.Sidebar;
 
 public class Language {
 
@@ -19,6 +20,7 @@ public class Language {
     private SoftwareInfo softwareInfo;
     private HardwareInfo hardwareInfo;
     private HardwareUse hardwareUse;
+    private HardwareStatistics hardwareStatistics;
     private Settings settings;
     private Home home;
     private Sidebar sidebar;
@@ -117,5 +119,13 @@ public class Language {
 
     public void setSidebar(Sidebar sidebar) {
         this.sidebar = sidebar;
+    }
+
+    public HardwareStatistics getHardwareStatistics() {
+        return hardwareStatistics;
+    }
+
+    public void setHardwareStatistics(HardwareStatistics hardwareStatistics) {
+        this.hardwareStatistics = hardwareStatistics;
     }
 }

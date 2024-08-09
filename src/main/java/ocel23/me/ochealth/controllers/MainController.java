@@ -3,22 +3,17 @@ package ocel23.me.ochealth.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import ocel23.me.ochealth.ConfigHandler;
-import ocel23.me.ochealth.LanguageHandler;
+import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
