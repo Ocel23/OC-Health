@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
+<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
    <center>
       <VBox alignment="CENTER" prefHeight="859.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--title" text="INFO">
                <VBox.margin>
-                  <Insets bottom="72.0" />
+                  <Insets bottom="32.0" />
                </VBox.margin>
             </Text>
             <Group>
@@ -37,9 +37,9 @@
                                        <children>
                                           <Group>
                                              <children>
-                                                <ScrollPane layoutX="14.0" minWidth="-Infinity" prefHeight="372.0" prefWidth="395.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
+                                                <ScrollPane layoutX="14.0" minWidth="-Infinity" prefHeight="383.0" prefWidth="393.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
                                                    <content>
-                                                      <VBox prefWidth="393.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox prefHeight="380.0" prefWidth="392.0" spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="cpuModel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Model:" />
                                                             <Text fx:id="cpuFamily" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Family:" />
@@ -74,7 +74,7 @@
                                              <children>
                                                 <ScrollPane prefHeight="373.0" prefWidth="384.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
                                                    <content>
-                                                      <VBox prefHeight="371.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox prefHeight="372.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="gpuName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Name:" />
                                                             <Text fx:id="gpuVendor" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Vendor:" />
@@ -107,7 +107,7 @@
                                              <children>
                                                 <ScrollPane prefHeight="373.0" prefWidth="384.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
                                                    <content>
-                                                      <VBox prefHeight="371.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox prefHeight="372.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="totalMemory" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Total memory:" />
                                                             <Text fx:id="virtualMemory" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Virtual memory:" />

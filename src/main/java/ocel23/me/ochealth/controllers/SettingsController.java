@@ -182,7 +182,6 @@ public class SettingsController implements Initializable {
 
                     exportTypeInput.getItems().addAll(items4);
 
-
                     exportButton.setOnAction(event -> {
 
                         FileChooser fileChooser = new FileChooser();
