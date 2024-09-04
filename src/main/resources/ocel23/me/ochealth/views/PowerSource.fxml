@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="powerSourceContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.PowerSourceController">
+<BorderPane fx:id="powerSourceContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.PowerSourceController">
    <center>
-      <ScrollPane fx:id="scrollContainer" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #0A2647;" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollContainer" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #0A2647;" styleClass="power--source--scroll" BorderPane.alignment="CENTER">
          <content>
-            <VBox alignment="CENTER" prefHeight="898.0" prefWidth="723.0" style="-fx-background-color: #0A2647;">
+            <VBox alignment="CENTER" style="-fx-background-color: #0A2647;">
                <children>
                   <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--title" text="POWER SOURCE">
                      <VBox.margin>
@@ -26,7 +26,7 @@
                      <children>
                         <FlowPane fx:id="contentContainer" alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefWidth="525.0" style="-fx-background-color: #0A2647;">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="32.0">
+                              <VBox spacing="32.0">
                                  <children>
                                     <Text fx:id="capacity" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Capacity:" />
                                     <Text fx:id="powerUsageRate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="power--source--info--content--text" text="Power usage rate:" />

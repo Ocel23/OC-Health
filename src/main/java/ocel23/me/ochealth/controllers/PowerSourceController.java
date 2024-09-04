@@ -1,5 +1,6 @@
 package ocel23.me.ochealth.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import javafx.scene.text.Text;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
 import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
+import org.controlsfx.control.Notifications;
 import oshi.SystemInfo;
 import oshi.hardware.*;
 
@@ -121,7 +123,7 @@ public class PowerSourceController implements Initializable {
 
                     @Override
                     public void run() {
-                        getBatteryData(languageHandler, language, powerSource);
+                        getBatteryData(languageHandler, language, powerSource, configHandler);
                     }
                 }, 0L, 1000L);
             }
@@ -130,7 +132,7 @@ public class PowerSourceController implements Initializable {
 
     }
 
-    private void getBatteryData(LanguageHandler languageHandler, String language, List<PowerSource> powerSource) {
+    private void getBatteryData(LanguageHandler languageHandler, String language, List<PowerSource> powerSource, ConfigHandler configHandler) {
         String vCapacity = "Capacity:";
         String vPowerUsageRate = "Power usage rate:";
         String vDeviceName = "Device name:";
@@ -165,6 +167,17 @@ public class PowerSourceController implements Initializable {
             double percents = 100 * ((double) powerSource1.getCurrentCapacity() / powerSource1.getMaxCapacity());
             double widthOfFillBattery = 203 * (percents / 100);
             batteryUse.setText(percents + "%");
+            if (percents <= 80 && percents > 0) {
+                if (configHandler.getSettingsFromConfig().isShowNotificationOnWarningValues()) {
+                    Platform.runLater(() -> {
+                        Notifications.create()
+                                .title("Power source")
+                                .text("Power source usage is lower than 80%.")
+                                .showWarning();
+
+                    });
+                }
+            }
             batteryFill.setWidth(widthOfFillBattery);
             if (percents > 70) {
                 batteryFill.setFill(Color.web("#00ff2a"));

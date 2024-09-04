@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="useContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareUseController">
+<BorderPane fx:id="useContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareUseController">
    <center>
-      <ScrollPane fitToWidth="true" style="-fx-background-color: #0A2647;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #0A2647;" styleClass="hardware--use--scroll" BorderPane.alignment="CENTER">
         <content>
             <VBox fx:id="useVBox" alignment="CENTER" styleClass="hardware--use--content">
                <children>
@@ -94,7 +94,7 @@
                                     <StackPane alignment="BOTTOM_CENTER" prefHeight="150.0" prefWidth="200.0">
                                        <children>
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="271.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
-                                          <Rectangle fx:id="ramBar" arcHeight="5.0" arcWidth="5.0" fill="#892d90" height="176.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                                          <Rectangle fx:id="ramBar" arcHeight="5.0" arcWidth="5.0" fill="#c83fd7" height="176.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
                                        </children>
                                     </StackPane>
                                     <VBox alignment="CENTER" spacing="32.0">
@@ -114,14 +114,14 @@
                                     <StackPane alignment="BOTTOM_CENTER" prefHeight="420.0" prefWidth="313.0">
                                        <children>
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="271.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#03b6c1" height="155.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#da2f29" height="155.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
                                        </children>
                                     </StackPane>
                                     <VBox alignment="CENTER" prefHeight="185.0" prefWidth="313.0" spacing="32.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--use--title" text="GPU" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--usage--text" text="65%" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--usage--value" text="(500/1000Ghz)" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--use--title" text="GPU - soon available" textAlignment="CENTER" wrappingWidth="193.58837890625" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--usage--text" text="0%" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--use--usage--value" text="(0/0Ghz)" />
                                        </children>
                                        <padding>
                                           <Insets bottom="32.0" top="32.0" />

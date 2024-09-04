@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
+<BorderPane fx:id="hardwareInfoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.HardwareInfoController">
    <center>
       <VBox alignment="CENTER" prefHeight="859.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,20 +26,20 @@
                     <tabs>
                       <Tab text="CPU">
                            <content>
-                              <VBox prefHeight="495.0" prefWidth="428.0">
+                              <VBox>
                                  <children>
                                     <Rectangle fx:id="tabPaneLine1" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="384.0">
                                        <VBox.margin>
                                           <Insets bottom="48.0" top="48.0" />
                                        </VBox.margin>
                                     </Rectangle>
-                                    <HBox fx:id="cpuContent" alignment="CENTER" prefHeight="327.0" prefWidth="428.0">
+                                    <HBox fx:id="cpuContent" alignment="CENTER">
                                        <children>
                                           <Group>
                                              <children>
-                                                <ScrollPane layoutX="14.0" minWidth="-Infinity" prefHeight="383.0" prefWidth="393.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="14.0" minWidth="-Infinity" prefHeight="383.0" prefWidth="448.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll">
                                                    <content>
-                                                      <VBox prefHeight="380.0" prefWidth="392.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="cpuModel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Model:" />
                                                             <Text fx:id="cpuFamily" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Family:" />
@@ -61,20 +61,20 @@
                         </Tab>
                       <Tab text="GPU">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox>
                                  <children>
                                     <Rectangle fx:id="tabPaneLine2" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="384.0">
                                        <VBox.margin>
                                           <Insets bottom="48.0" top="48.0" />
                                        </VBox.margin>
                                     </Rectangle>
-                                    <HBox fx:id="gpuContent" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox fx:id="gpuContent" alignment="CENTER">
                                        <children>
                                           <Group>
                                              <children>
-                                                <ScrollPane prefHeight="373.0" prefWidth="384.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="-69.0" prefHeight="373.0" prefWidth="448.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll">
                                                    <content>
-                                                      <VBox prefHeight="372.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="gpuName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Name:" />
                                                             <Text fx:id="gpuVendor" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Vendor:" />
@@ -94,20 +94,20 @@
                         </Tab>
                         <Tab text="RAM">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox>
                                  <children>
                                     <Rectangle fx:id="tabPaneLine3" arcHeight="10.0" arcWidth="10.0" fill="WHITE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="384.0">
                                        <VBox.margin>
                                           <Insets bottom="48.0" top="48.0" />
                                        </VBox.margin>
                                     </Rectangle>
-                                    <HBox fx:id="memoryContent" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox fx:id="memoryContent" alignment="CENTER">
                                        <children>
                                           <Group>
                                              <children>
-                                                <ScrollPane prefHeight="373.0" prefWidth="384.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll-pane">
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="373.0" prefWidth="448.0" style="-fx-background-color: #0A2647;" styleClass="hardware--info--scroll">
                                                    <content>
-                                                      <VBox prefHeight="372.0" prefWidth="382.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                                                      <VBox spacing="32.0" style="-fx-background-color: #0A2647;">
                                                          <children>
                                                             <Text fx:id="totalMemory" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Total memory:" />
                                                             <Text fx:id="virtualMemory" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hardware--info--tab--content" text="Virtual memory:" />

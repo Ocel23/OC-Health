@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -17,7 +18,10 @@ import ocel23.me.ochealth.fileHandlers.StatisticsHandler;
 import ocel23.me.ochealth.models.Menu;
 import ocel23.me.ochealth.models.Settings;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -61,7 +65,7 @@ public class SettingsController implements Initializable {
     @FXML
     private Text collectDataInfo;
     @FXML
-    private Text reportBugInfo;
+    private Hyperlink reportBugInfo;
     @FXML
     private Button exportButton;
     @FXML
@@ -92,6 +96,16 @@ public class SettingsController implements Initializable {
                     ConfigHandler configHandler = new ConfigHandler();
 
                     String language2 = configHandler.getSettingsFromConfig().getLanguage();
+
+                    reportBugInfo.setOnAction(event -> {
+
+                        try {
+                            Desktop.getDesktop().browse(new URL("https://github.com/Ocel23").toURI());
+                        } catch (IOException | URISyntaxException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    });
 
                     String vTitle = "SETTINGS";
                     String vDefaultSectionOnStartApp = "Default section on start:";

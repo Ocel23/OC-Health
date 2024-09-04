@@ -110,14 +110,16 @@ public class DevicesController implements Initializable {
                         throw new RuntimeException(e);
                     }
 
-                    timer.schedule(new TimerTask() {
+                    if (configHandler.getSettingsFromConfig().isCollectStatisticData()) {
+                        timer.schedule(new TimerTask() {
 
-                        @Override
-                        public void run() {
-                            writeLogs(writer, hw);
+                            @Override
+                            public void run() {
+                                writeLogs(writer, hw);
 
-                        }
-                    }, 0L, interval);
+                            }
+                        }, 0L, interval);
+                    }
                 }
 
                 createDevicesView(hw);

@@ -1,5 +1,6 @@
 package ocel23.me.ochealth.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -16,6 +17,7 @@ import javafx.scene.text.Text;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
 import ocel23.me.ochealth.fileHandlers.LanguageHandler;
 import ocel23.me.ochealth.models.Menu;
+import org.controlsfx.control.Notifications;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -204,7 +206,6 @@ public class HardwareUseController implements Initializable {
                 long maxFreq = cpu.getMaxFreq();
                 double maxFreqConverted = (double) maxFreq / 1000000000;
 
-
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -237,6 +238,15 @@ public class HardwareUseController implements Initializable {
                         }
 
                         if (cpuUsage > 80) {
+                            if (configHandler.getSettingsFromConfig().isShowNotificationOnWarningValues()) {
+                                Platform.runLater(() -> {
+                                    Notifications.create()
+                                            .title("Hardware use")
+                                            .text("Cpu usage is higher than 80%.")
+                                            .showWarning();
+
+                                });
+                            }
                             try {
                                 writer.write("[HARDWARE] Cpu usage is bigger than 80%! (" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
                             } catch (IOException e) {
@@ -245,6 +255,14 @@ public class HardwareUseController implements Initializable {
                         }
 
                         if (ramUsage > 80) {
+                            if (configHandler.getSettingsFromConfig().isShowNotificationOnWarningValues()) {
+                                Platform.runLater(() -> {
+                                    Notifications.create()
+                                            .title("Hardware use")
+                                            .text("Memory usage is higher than 80%.")
+                                            .showWarning();
+                                });
+                            }
                             try {
                                 writer.write("[HARDWARE] Ram usage is bigger than 80%! (" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
                             } catch (IOException e) {

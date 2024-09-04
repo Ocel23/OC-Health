@@ -100,6 +100,52 @@ public class HardwareUseStatisticsController implements Initializable {
 
                 title.setText(text2[0]);
 
+                latestTimer = new Timer();
+
+                latestTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        updateRam(series, memory);
+                    }
+                }, 0L, 1000L);
+
+
+                String finalVProcessor = vProcessor;
+                cpuButton.setOnAction(event -> {
+                    latestTimer.cancel();
+                    latestTimer = new Timer();
+                    resetData(series);
+                    chart.getYAxis().setLabel("GHZ");
+                    chart.setTitle(finalVProcessor);
+                    time = 1;
+                    latestTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            updateCpu(series, cpu);
+                        }
+                    }, 0L, 1000L);
+                });
+
+                String finalVMemory = vMemory;
+                ramButton.setOnAction(event -> {
+                    latestTimer.cancel();
+                    latestTimer = new Timer();
+                    resetData(series);
+                    chart.getYAxis().setLabel("GB");
+                    chart.setTitle(finalVMemory);
+                    time = 1;
+                    latestTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            updateRam(series,memory);
+                        }
+                    }, 0L, 1000L);
+                });
+
+                gpuButton.setOnAction(event -> {
+
+                });
+
                 hardwareStatisticsUseContainer.widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -148,52 +194,6 @@ public class HardwareUseStatisticsController implements Initializable {
                         }
                     }, 0L, interval);
                 }
-
-                latestTimer = new Timer();
-
-                latestTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        updateRam(series, memory);
-                    }
-                }, 0L, 1000L);
-
-
-                String finalVProcessor = vProcessor;
-                cpuButton.setOnAction(event -> {
-                    latestTimer.cancel();
-                    latestTimer = new Timer();
-                    resetData(series);
-                    chart.getYAxis().setLabel("GHZ");
-                    chart.setTitle(finalVProcessor);
-                    time = 1;
-                    latestTimer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            updateCpu(series, cpu);
-                        }
-                    }, 0L, 1000L);
-                });
-
-                String finalVMemory = vMemory;
-                ramButton.setOnAction(event -> {
-                    latestTimer.cancel();
-                    latestTimer = new Timer();
-                    resetData(series);
-                    chart.getYAxis().setLabel("GB");
-                    chart.setTitle(finalVMemory);
-                    time = 1;
-                    latestTimer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            updateRam(series,memory);
-                        }
-                    }, 0L, 1000L);
-                });
-
-                gpuButton.setOnAction(event -> {
-
-                });
             }
         });
     }

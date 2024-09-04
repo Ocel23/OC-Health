@@ -6,6 +6,8 @@ module ocel23.me.ochealth {
     requires org.yaml.snakeyaml;
     requires java.sql;
     requires com.google.gson;
+    requires org.controlsfx.controls;
+    requires java.desktop;
 
     opens ocel23.me.ochealth to javafx.fxml;
     exports ocel23.me.ochealth;

@@ -53,8 +53,10 @@ public class Main extends Application {
             String css = this.getClass().getResource("application.css").toExternalForm();
             scene.getStylesheets().add(css);
 
+            /*
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(800);
+            */
 
             primaryStage.setTitle("OC Health");
             primaryStage.setScene(scene);
@@ -69,3 +71,4 @@ public class Main extends Application {
         launch();
     }
 }
+

@@ -8,7 +8,7 @@
 
 <Accordion fx:id="sidebar" prefWidth="340.0" styleClass="main--sidebar" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SideBarController">
    <panes>
-      <TitledPane fx:id="home" styleClass="main--sidebar--item" text="Home" />
+      <TitledPane fx:id="home" onMouseClicked="#switchToHomeController" styleClass="main--sidebar--item" text="Home" />
       <TitledPane styleClass="main--sidebar--item" text="Hardware">
          <content>
             <VBox alignment="CENTER" prefHeight="220.0" prefWidth="336.0" styleClass="main--sidebar--item--options">

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="infoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SoftwareInfoController">
+<BorderPane fx:id="infoContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="800.0" style="-fx-background-color: #0A2647;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ocel23.me.ochealth.controllers.SoftwareInfoController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,11 +19,11 @@
             </Text>
             <Group>
                <children>
-                  <ScrollPane fx:id="scrollContainer" prefHeight="457.0" prefWidth="527.0" style="-fx-background-color: #0A2647;">
+                  <ScrollPane fx:id="scrollContainer" fitToHeight="true" fitToWidth="true" prefWidth="527.0" style="-fx-background-color: #0A2647;" styleClass="software--info--scroll">
                      <content>
-                        <HBox fx:id="contentContainer" alignment="CENTER" prefHeight="456.0" prefWidth="525.0" style="-fx-background-color: #0A2647;">
+                        <HBox fx:id="contentContainer" alignment="CENTER" style="-fx-background-color: #0A2647;">
                            <children>
-                              <VBox prefHeight="457.0" prefWidth="526.0" spacing="32.0" style="-fx-background-color: #0A2647;">
+                              <VBox prefWidth="512.0" spacing="32.0" style="-fx-background-color: #0A2647;">
                                  <children>
                                     <Text fx:id="familyText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="software--info--content--text" text="Family:" />
                                     <Text fx:id="versionText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="software--info--content--text" text="Version:" />

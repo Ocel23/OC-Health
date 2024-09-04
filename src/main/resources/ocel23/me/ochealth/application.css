@@ -3,6 +3,30 @@ body {
     -fx-font-family: "Poppins";
 }
 
+.main--scroll .corner {
+    -fx-background-color: transparent;
+}
+
+.main--scroll .scroll-bar:vertical,
+.main--scroll .scroll-bar:vertical .track,
+.main--scroll .scroll-bar:vertical .track-background,
+.main--scroll .scroll-bar:horizontal,
+.main--scroll .scroll-bar:horizontal .track,
+.main--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.main--scroll .scroll-bar .increment-button,
+.main--scroll .scroll-bar .increment-arrow,
+.main--scroll .scroll-bar .decrement-arrow,
+.main--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.main--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
 .main--sidebar--item > .content {
     -fx-background-color: #144272;
     -fx-border-width: 0;
@@ -96,6 +120,26 @@ body {
     -fx-font-size: 20px;
 }
 
+.hardware--use--scroll .scroll-bar:vertical,
+.hardware--use--scroll .scroll-bar:vertical .track,
+.hardware--use--scroll .scroll-bar:vertical .track-background,
+.hardware--use--scroll .scroll-bar:horizontal,
+.hardware--use--scroll .scroll-bar:horizontal .track,
+.hardware--use--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.hardware--use--scroll .scroll-bar .increment-button,
+.hardware--use--scroll .scroll-bar .increment-arrow,
+.hardware--use--scroll .scroll-bar .decrement-arrow,
+.hardware--use--scroll.scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.hardware--use--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
 .hardware--use--content {
     -fx-background-color: #0A2647;
 }
@@ -158,7 +202,6 @@ body {
     -fx-background-radius: 10px;
 }
 
-
 .hardware--info--tab  .tab-header-area .tab .tab-label {
     -fx-text-fill: white;
     -fx-font-size: 35px;
@@ -170,11 +213,43 @@ body {
     -fx-font-size: 25px;
 }
 
-.hardware--info--scroll-pane .scroll-bar .track{
-    -fx-background-color: #144272
+.hardware--info--scroll .scroll-bar:vertical,
+.hardware--info--scroll .scroll-bar:vertical .track,
+.hardware--info--scroll .scroll-bar:vertical .track-background,
+.hardware--info--scroll .scroll-bar:horizontal,
+.hardware--info--scroll .scroll-bar:horizontal .track,
+.hardware--info--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
 }
 
-.hardware--info--scroll-pane .scroll-bar .thumb{
+.hardware--info--scroll .scroll-bar .increment-button,
+.hardware--info--scroll .scroll-bar .increment-arrow,
+.hardware--info--scroll .scroll-bar .decrement-arrow,
+.hardware--info--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.hardware--info--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
+.software--use--scroll .scroll-bar:vertical,
+.software--use--scroll .scroll-bar:vertical .track,
+.software--use--scroll .scroll-bar:vertical .track-background,
+.software--use--scroll .scroll-bar:horizontal,
+.software--use--scroll .scroll-bar:horizontal .track,
+.software--use--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.software--use--scroll .scroll-bar .increment-button,
+.software--use--scroll .scroll-bar .increment-arrow,
+.software--use--scroll .scroll-bar .decrement-arrow,
+.software--use--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.software--use--scroll .scroll-bar:vertical .thumb{
     -fx-background-color: #D9D9D9;
 }
 
@@ -234,6 +309,31 @@ body {
     -fx-background-color: #859CB4;
 }
 
+.software--info--scroll .scroll-bar:vertical,
+.software--info--scroll .scroll-bar:vertical .track,
+.software--info--scroll .scroll-bar:vertical .track-background,
+.software--info--scroll .scroll-bar:horizontal,
+.software--info--scroll .scroll-bar:horizontal .track,
+.software--info--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.software--info--scroll .scroll-bar .increment-button,
+.software--info--scroll .scroll-bar .increment-arrow,
+.software--info--scroll .scroll-bar .decrement-arrow,
+.software--info--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.software--info--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
+.main--sidebar--item > .content {
+    -fx-background-color: #144272;
+    -fx-border-width: 0;
+}
+
 .software--info--title {
     -fx-font-weight: 700;
     -fx-font-size: 48.83px;
@@ -244,6 +344,26 @@ body {
     -fx-font-family: "Poppins Medium";
     -fx-fill: white;
     -fx-font-size: 25px;
+}
+
+.network--info--scroll .scroll-bar:vertical,
+.network--info--scroll .scroll-bar:vertical .track,
+.network--info--scroll .scroll-bar:vertical .track-background,
+.network--info--scroll .scroll-bar:horizontal,
+.network--info--scroll .scroll-bar:horizontal .track,
+.network--info--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.network--info--scroll .scroll-bar .increment-button,
+.network--info--scroll .scroll-bar .increment-arrow,
+.network--info--scroll .scroll-bar .decrement-arrow,
+.network--info--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.network--info--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
 }
 
 .network--info--title {
@@ -258,10 +378,50 @@ body {
     -fx-font-size: 25px;
 }
 
+.devices--info--scroll .scroll-bar:vertical,
+.devices--info--scroll .scroll-bar:vertical .track,
+.devices--info--scroll .scroll-bar:vertical .track-background,
+.devices--info--scroll .scroll-bar:horizontal,
+.devices--info--scroll .scroll-bar:horizontal .track,
+.devices--info--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.devices--info--scroll .scroll-bar .increment-button,
+.devices--info--scroll .scroll-bar .increment-arrow,
+.devices--info--scroll .scroll-bar .decrement-arrow,
+.devices--info--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.devices--info--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
+}
+
 .devices--info--title {
     -fx-font-weight: 700;
     -fx-font-size: 48.83px;
     -fx-fill: white;
+}
+
+.power--source--scroll .scroll-bar:vertical,
+.power--source--scroll .scroll-bar:vertical .track,
+.power--source--scroll .scroll-bar:vertical .track-background,
+.power--source--scroll .scroll-bar:horizontal,
+.power--source--scroll .scroll-bar:horizontal .track,
+.power--source--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.power--source--scroll .scroll-bar .increment-button,
+.power--source--scroll .scroll-bar .increment-arrow,
+.power--source--scroll .scroll-bar .decrement-arrow,
+.power--source--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.power--source--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
 }
 
 .power--source--info--content--text {
@@ -274,6 +434,26 @@ body {
     -fx-font-weight: 700;
     -fx-font-size: 48.83px;
     -fx-fill: white;
+}
+
+.another--components--scroll .scroll-bar:vertical,
+.another--components--scroll .scroll-bar:vertical .track,
+.another--components--scroll .scroll-bar:vertical .track-background,
+.another--components--scroll .scroll-bar:horizontal,
+.another--components--scroll .scroll-bar:horizontal .track,
+.another--components--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.another--components--scroll .scroll-bar .increment-button,
+.another--components--scroll .scroll-bar .increment-arrow,
+.another--components--scroll .scroll-bar .decrement-arrow,
+.another--components--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.another--components--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
 }
 
 .another--components--info--content--text {
@@ -292,6 +472,26 @@ body {
     -fx-font-family: "Poppins Medium";
     -fx-fill: white;
     -fx-font-size: 39px;
+}
+
+.settings--scroll .scroll-bar:vertical,
+.settings--scroll .scroll-bar:vertical .track,
+.settings--scroll .scroll-bar:vertical .track-background,
+.settings--scroll .scroll-bar:horizontal,
+.settings--scroll .scroll-bar:horizontal .track,
+.settings--scroll .scroll-bar:horizontal .track-background {
+    -fx-background-color: #144272;
+}
+
+.settings--scroll .scroll-bar .increment-button,
+.settings--scroll .scroll-bar .increment-arrow,
+.settings--scroll .scroll-bar .decrement-arrow,
+.settings--scroll .scroll-bar .decrement-button {
+    visibility: false;
+}
+
+.settings--scroll .scroll-bar:vertical .thumb{
+    -fx-background-color: #D9D9D9;
 }
 
 .settings--info--title {
@@ -361,7 +561,7 @@ body {
 
 .settings--bugs--text {
     -fx-font-family: "Poppins Medium";
-    -fx-fill: white;
+    -fx-text-fill: white;
     -fx-font-size: 25px;
 }
 
@@ -382,6 +582,7 @@ body {
     -fx-translate-x: -24px;
     -fx-shape: "m 182.18453,144.3869 c 0,43.8376 -34.18359,79.375 -76.35119,79.375 -42.167596,0 -76.351185,-35.5374 -76.351185,-79.375 1e-6,-43.8376 34.18359,-79.374996 76.351185,-79.374998 42.1676,-1e-6 76.35119,35.537398 76.35119,79.374998 z";
 }
+
 .settings--checkbox:selected .box .mark {
     -fx-translate-x: 24px;
 }

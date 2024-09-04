@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
@@ -64,7 +65,8 @@ public class SideBarController implements Initializable {
     public void switchToHardwareUseScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUse.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -72,7 +74,8 @@ public class SideBarController implements Initializable {
     public void switchToHardwareInfoScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareInfo.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -80,7 +83,8 @@ public class SideBarController implements Initializable {
     public void switchToSoftwareUseScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/SotwareUse.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -88,7 +92,8 @@ public class SideBarController implements Initializable {
     public void switchToSoftwareInfoScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/SoftwareInfo.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -96,7 +101,8 @@ public class SideBarController implements Initializable {
     public void switchToNetworkUseScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/NetworkUse.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -104,7 +110,8 @@ public class SideBarController implements Initializable {
     public void switchToNetworkInfoScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/NetworkInfo.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -112,7 +119,8 @@ public class SideBarController implements Initializable {
     public void switchToDevicesScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/Devices.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -120,7 +128,8 @@ public class SideBarController implements Initializable {
     public void switchToPowerSourceScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/PowerSource.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -128,7 +137,8 @@ public class SideBarController implements Initializable {
     public void switchToAnotherComponentsController(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/AnotherComponents.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -136,7 +146,8 @@ public class SideBarController implements Initializable {
     public void switchToSettingsController(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/Settings.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -144,7 +155,17 @@ public class SideBarController implements Initializable {
     public void switchToHardwareStatisticsController(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUseStatistics.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToHomeController(MouseEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/Main.fxml"));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene1 = ((Node) e.getSource()).getScene();
+        scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
         stage.show();
     }
