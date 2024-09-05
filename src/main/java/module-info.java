@@ -8,6 +8,9 @@ module ocel23.me.ochealth {
     requires com.google.gson;
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires java.prefs;
+    requires org.apache.commons.io;
+    requires static lombok;
 
     opens ocel23.me.ochealth to javafx.fxml;
     exports ocel23.me.ochealth;

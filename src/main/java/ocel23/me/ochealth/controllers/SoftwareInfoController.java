@@ -25,7 +25,6 @@ public class SoftwareInfoController implements Initializable {
 
     @FXML
     private BorderPane infoContainer;
-
     @FXML
     private Text familyText;
     @FXML
@@ -54,16 +53,19 @@ public class SoftwareInfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
         infoContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(infoContainer);
 
                 SystemInfo si = new SystemInfo();
                 OperatingSystem os = si.getOperatingSystem();
 
+                //pass container for function sidebar
                 infoContainer.getScene().setUserData(infoContainer);
 
                 infoContainer.getScene().widthProperty().addListener(new ChangeListener<>() {
@@ -74,7 +76,7 @@ public class SoftwareInfoController implements Initializable {
                         scrollContainer.setPrefWidth(width - 400);
                         contentContainer.setPrefWidth(scrollContainer.getPrefWidth() - 2);
 
-
+                        //handling language values
                         LanguageHandler languageHandler = new LanguageHandler();
 
                         ConfigHandler configHandler = new ConfigHandler();
@@ -101,6 +103,7 @@ public class SoftwareInfoController implements Initializable {
                             vDeskopCount = languageHandler.getLanguageValues().getSoftwareInfo().getDesktopCount();
                         }
 
+                        //set values for texts
                         familyText.setText(vFamily + " " + os.getFamily());
                         versionText.setText(vVersion + " " + os.getVersionInfo());
                         bitnessText.setText(vBitness + " " + os.getBitness());
@@ -112,6 +115,7 @@ public class SoftwareInfoController implements Initializable {
                         String [] text4 = vTitle.split(" ");
                         title.setText(text4[0]);
 
+                        //change elements by screen width
                         String osFamilyType = os.getFamily();
                         if (width > 1600) {
                             isLoadedSmall = false;

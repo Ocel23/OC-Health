@@ -19,11 +19,10 @@ import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,13 +39,10 @@ public class SoftwareUseController implements Initializable {
     private TableColumn<Process, String> memoryColumn;
     @FXML
     private TableColumn<Process, String> stateColumn;
-
     @FXML
     private TableView<Process> table;
-
     @FXML
     private ScrollPane scrollContainer;
-
     @FXML
     private Text title;
 
@@ -54,10 +50,15 @@ public class SoftwareUseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         softwareUseContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(softwareUseContainer);
+
+                //pass container for function sidebar
+                softwareUseContainer.getScene().setUserData(softwareUseContainer);
 
                 SystemInfo si = new SystemInfo();
                 OperatingSystem os = si.getOperatingSystem();
@@ -68,9 +69,8 @@ public class SoftwareUseController implements Initializable {
 
                 ConfigHandler configHandler = new ConfigHandler();
 
+                //handling language values
                 String language = configHandler.getSettingsFromConfig().getLanguage();
-
-                softwareUseContainer.getScene().setUserData(softwareUseContainer);
 
                 String vName = "Name:";
                 String vCpu = "CPU:";
@@ -86,6 +86,7 @@ public class SoftwareUseController implements Initializable {
                     vState = languageHandler.getLanguageValues().getSoftwareUse().getState();
                 }
 
+                //set values for texts
                 nameColumn.setText(vName);
                 cpuColumn.setText(vCpu);
                 memoryColumn.setText(vMemory);
@@ -95,6 +96,7 @@ public class SoftwareUseController implements Initializable {
                 title.setText(text2[0]);
 
                 String finalVTitle = vTitle;
+                //change elements by screen width
                 softwareUseContainer.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
                     Scene scene = softwareUseContainer.getScene();
                     double width = scene.getWidth();
@@ -111,11 +113,16 @@ public class SoftwareUseController implements Initializable {
 
                 List<OSProcess> processes = os.getProcesses();
 
+                //write logs to logs file
                 FileWriter writer;
 
+                String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+                File customDir = new File(path);
+                File logsFile = new File(customDir.getAbsolutePath() + "/logs.txt");
+
                 try {
-                    writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-                } catch (IOException | URISyntaxException e) {
+                    writer = new FileWriter(logsFile);
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
 
@@ -126,6 +133,7 @@ public class SoftwareUseController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
+                //create table data and display them for user
                 nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
                 cpuColumn.setCellValueFactory(new PropertyValueFactory<>("cpuUsage"));
                 memoryColumn.setCellValueFactory(new PropertyValueFactory<>("memoryUsage"));

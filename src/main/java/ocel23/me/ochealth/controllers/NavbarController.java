@@ -17,6 +17,9 @@ public class NavbarController implements Initializable {
     @FXML
     private ImageView navbarIcon;
 
+    /**
+     * this method toggle sidebar between hide and show
+     */
     @FXML
     public void toggleSideBar() {
 

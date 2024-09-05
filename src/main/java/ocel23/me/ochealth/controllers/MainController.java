@@ -1,7 +1,5 @@
 package ocel23.me.ochealth.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -34,17 +32,24 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Menu menu = new Menu();
-        menu.create(mainContainer);
-
-        LanguageHandler languageHandler = new LanguageHandler();
-
-        ConfigHandler configHandler = new ConfigHandler();
 
         mainContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+
+            //if for prevent wrong loading of elements
             if (newScene != null) {
+
+                //create sidebar for app
+                Menu menu = new Menu();
+                menu.create(mainContainer);
+
+                LanguageHandler languageHandler = new LanguageHandler();
+
+                ConfigHandler configHandler = new ConfigHandler();
+
+                //pass container for function sidebar
                 mainContainer.getScene().setUserData(mainContainer);
 
+                //handling language values
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
                 if (language.equalsIgnoreCase("Czech")) {
@@ -53,23 +58,21 @@ public class MainController implements Initializable {
                     secondContentArticle.setText(languageHandler.getLanguageValues().getHome().getDescription2());
                 }
 
-                mainContainer.getScene().widthProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                        Scene scene = mainContainer.getScene();
-                        tittleBg.widthProperty().bind(scene.widthProperty().divide(2));
-                        bottomLine.widthProperty().bind(scene.widthProperty().divide(2));
-                        secondContentArticle.wrappingWidthProperty().bind(scene.widthProperty().divide(2));
-                        firstContentArticle.wrappingWidthProperty().bind(scene.widthProperty().divide(2));
-                        if (scene.getWidth() > 1200) {
-                            secondContentArticle.setFont(Font.font("Poppins Medium", 31.3));
-                            firstContentArticle.setFont(Font.font("Poppins Medium", 31.3));
-                            bottomText.setFont(Font.font("Poppins Medium", 25));
-                        } else if (scene.getWidth() < 1200) {
-                            firstContentArticle.setFont(Font.font("Poppins Medium", 25));
-                            secondContentArticle.setFont(Font.font("Poppins Medium", 25));
-                            bottomText.setFont(Font.font("Poppins Medium", 20));
-                        }
+                //change elements by screen width
+                mainContainer.getScene().widthProperty().addListener((observableValue1, oldValue, newValue) -> {
+                    Scene scene = mainContainer.getScene();
+                    tittleBg.widthProperty().bind(scene.widthProperty().divide(2));
+                    bottomLine.widthProperty().bind(scene.widthProperty().divide(2));
+                    secondContentArticle.wrappingWidthProperty().bind(scene.widthProperty().divide(2));
+                    firstContentArticle.wrappingWidthProperty().bind(scene.widthProperty().divide(2));
+                    if (scene.getWidth() > 1200) {
+                        secondContentArticle.setFont(Font.font("Poppins Medium", 31.3));
+                        firstContentArticle.setFont(Font.font("Poppins Medium", 31.3));
+                        bottomText.setFont(Font.font("Poppins Medium", 25));
+                    } else if (scene.getWidth() < 1200) {
+                        firstContentArticle.setFont(Font.font("Poppins Medium", 25));
+                        secondContentArticle.setFont(Font.font("Poppins Medium", 25));
+                        bottomText.setFont(Font.font("Poppins Medium", 20));
                     }
                 });
             }

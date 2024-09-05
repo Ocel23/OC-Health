@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import ocel23.me.ochealth.Utils;
@@ -20,11 +18,10 @@ import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -36,7 +33,6 @@ public class HardwareUseStatisticsController implements Initializable {
 
     @FXML
     private BorderPane hardwareStatisticsUseContainer;
-
     @FXML
     private Text title;
     @FXML
@@ -58,11 +54,17 @@ public class HardwareUseStatisticsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(hardwareStatisticsUseContainer);
 
         hardwareStatisticsUseContainer.sceneProperty().addListener((observable, oldScene, newScene) -> {
+
+            //if for prevent wrong loading of elements
             if (newScene != null) {
+
+                //create sidebar for app
+                Menu menu = new Menu();
+                menu.create(hardwareStatisticsUseContainer);
+
+                //pass container for function sidebar
                 hardwareStatisticsUseContainer.getScene().setUserData(hardwareStatisticsUseContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
@@ -83,6 +85,7 @@ public class HardwareUseStatisticsController implements Initializable {
 
                 long interval = Utils.getInterval(configHandler);
 
+                //handling language values
                 String vTitle = "HARDWARE STATISTICS";
                 String vProcessor = "PROCESSOR USE";
                 String vMemory = "MEMORY USE";
@@ -102,6 +105,7 @@ public class HardwareUseStatisticsController implements Initializable {
 
                 latestTimer = new Timer();
 
+                //timer which update on start ram chart
                 latestTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -109,7 +113,7 @@ public class HardwareUseStatisticsController implements Initializable {
                     }
                 }, 0L, 1000L);
 
-
+                //buttons event for handle switch type of chart
                 String finalVProcessor = vProcessor;
                 cpuButton.setOnAction(event -> {
                     latestTimer.cancel();
@@ -146,6 +150,7 @@ public class HardwareUseStatisticsController implements Initializable {
 
                 });
 
+                //change elements by screen width
                 hardwareStatisticsUseContainer.widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -170,15 +175,19 @@ public class HardwareUseStatisticsController implements Initializable {
                     }
                 });
 
+                //handle write logs
                 if (configHandler.getSettingsFromConfig().isCollectStatisticData()) {
                     timer.schedule(new TimerTask() {
 
                         @Override
                         public void run() {
                             FileWriter writer;
+                            String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+                            File customDir = new File(path);
+                            File statisticsFile = new File(customDir.getAbsolutePath() + "/statistics.txt");
                             try {
-                                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/statistics.txt").toURI()).toFile());
-                            } catch (IOException | URISyntaxException e) {
+                                writer = new FileWriter(statisticsFile);
+                            } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
 
@@ -198,6 +207,11 @@ public class HardwareUseStatisticsController implements Initializable {
         });
     }
 
+    /**
+     * this method get current memory
+     * @param memory - object for get values from memory
+     * @return current memory
+     */
     private double getCurrentMemory(GlobalMemory memory) {
         double totalMemory = (double) memory.getTotal() / 1073741824;
         totalMemory = (double) Math.round(totalMemory * 100) / 100;
@@ -206,16 +220,29 @@ public class HardwareUseStatisticsController implements Initializable {
         return totalMemory - availableMemory;
     }
 
+    /**
+     * this method update ram
+     * @param series - piece of chart
+     * @param memory - object for get values from memory
+     */
     private void updateRam(XYChart.Series<Number, Number> series, GlobalMemory memory) {
         getCurrentMemory(memory);
         updateData(series, getCurrentMemory(memory));
     }
 
-
+    /**
+     * this method reset data
+     * @param series - piece of chart
+     */
     private void resetData(XYChart.Series<Number, Number> series) {
         series.getData().clear();
     }
 
+    /**
+     * this method update for serie
+     * @param series - piece of chart
+     * @param value
+     */
     private void updateData(XYChart.Series<Number, Number> series, double value) {
         if (time < 60) {
             time++;
@@ -236,6 +263,11 @@ public class HardwareUseStatisticsController implements Initializable {
         }
     }
 
+    /**
+     * this method update cpu
+     * @param series - piece of chart
+     * @param cpu - object for get values from cpu
+     */
     private void updateCpu(XYChart.Series<Number, Number> series, CentralProcessor cpu) {
         double cpuUsage = cpu.getSystemCpuLoad(1000L) * 100;
         cpuUsage = (double) Math.round(cpuUsage * 100) / 100;

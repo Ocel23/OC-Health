@@ -86,11 +86,15 @@ public class HardwareInfoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         hardwareInfoContainer.sceneProperty().addListener((((observableValue, oldScene, newScene) -> {
+            //if for prevent wrong loading of elements
+
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(hardwareInfoContainer);
 
+                //pass container for function sidebar
                 hardwareInfoContainer.getScene().setUserData(hardwareInfoContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
@@ -99,6 +103,7 @@ public class HardwareInfoController implements Initializable {
 
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
+                //handling language values
                 String vCpuCores = "Cores:";
                 String vCpuFamily = "Family:";
                 String vCpuName = "Name:";
@@ -139,6 +144,7 @@ public class HardwareInfoController implements Initializable {
                 String [] text2 = vTitle.split(" ");
                 title.setText(text2[0]);
 
+                //change elements by screen width
                 hardwareInfoContainer.getScene().widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -214,6 +220,7 @@ public class HardwareInfoController implements Initializable {
                     }
                 });
 
+                //set values for texts
                 SystemInfo si = new SystemInfo();
                 CentralProcessor cpu = si.getHardware().getProcessor();
                 CentralProcessor.ProcessorIdentifier processorIdentifier = cpu.getProcessorIdentifier();

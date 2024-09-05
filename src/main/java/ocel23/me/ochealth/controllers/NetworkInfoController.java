@@ -55,11 +55,14 @@ public class NetworkInfoController implements Initializable {
 
         networkInfoContainer.sceneProperty().addListener((observableValue, oldScene, newScene) -> {
 
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(networkInfoContainer);
 
+                //pass container for function sidebar
                 networkInfoContainer.getScene().setUserData(networkInfoContainer);
 
                 SystemInfo si = new SystemInfo();
@@ -70,6 +73,7 @@ public class NetworkInfoController implements Initializable {
 
                 ConfigHandler configHandler = new ConfigHandler();
 
+                //handling language values
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
                 String vIpv4Address = "Ipv4 address:";
@@ -100,6 +104,7 @@ public class NetworkInfoController implements Initializable {
                 String [] text = finalVTitle.split(" ");
                 title.setText(text[0]);
 
+                //change elements by screen width
                 networkInfoContainer.widthProperty().addListener(new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -137,6 +142,7 @@ public class NetworkInfoController implements Initializable {
                     }
                 });
 
+                //set values for texts
                 for (NetworkIF networkIF : hw.getNetworkIFs()) {
                     StringBuilder ipv4 = new StringBuilder();
                     for (int j = 0; j < networkIF.getIPv4addr().length; j++) {

@@ -7,12 +7,37 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
+import org.apache.commons.io.FileUtils;
 
+import java.io.*;
+
+/**
+ *This class provide core functions of app
+ *like settings basic settings of app and loading files
+ * @author Ocel23
+ * @version 1.0
+ * @since 2024-05-09
+ */
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
+
+            //create files in user home directory for config, logs, statistics
+            String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+            File customDir = new File(path);
+
+            File logs = new File(customDir.getAbsolutePath() + "/logs.txt");
+            logs.createNewFile();
+            File statistics = new File(customDir.getAbsolutePath() + "/statistics.txt");
+            statistics.createNewFile();
+
+            File config = new File(customDir.getAbsolutePath() + "/config.yaml");
+
+            if (!(config.exists())) {
+                FileUtils.copyFile(new File(Main2.class.getResource("config.yaml").toURI().getPath()), config);
+            }
 
             ConfigHandler configHandler = new ConfigHandler();
 
@@ -20,6 +45,7 @@ public class Main extends Application {
 
             String section = configHandler.getSettingsFromConfig().getDefaultSectionOnStart();
 
+            //load document fxml by if, value gets from config
             if (section.equalsIgnoreCase("Home")) {
                 root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/Main.fxml"));
             } else if (section.equalsIgnoreCase("Devices")) {
@@ -46,11 +72,13 @@ public class Main extends Application {
 
             Scene scene = new Scene(root);
 
+            //loading fonts
             Font.loadFont(this.getClass().getResource("fonts/Poppins-Regular.ttf").openStream(), 16);
             Font.loadFont(getClass().getResource("fonts/Poppins-Medium.ttf").openStream(), 16);
             Font.loadFont(getClass().getResource("fonts/Poppins-Bold.ttf").openStream(), 16);
 
             String css = this.getClass().getResource("application.css").toExternalForm();
+
             scene.getStylesheets().add(css);
 
             /*

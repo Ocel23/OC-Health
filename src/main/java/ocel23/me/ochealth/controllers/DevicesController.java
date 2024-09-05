@@ -23,11 +23,11 @@ import ocel23.me.ochealth.enums.DeviceType;
 import oshi.SystemInfo;
 import oshi.hardware.*;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -43,6 +43,7 @@ public class DevicesController implements Initializable {
     @FXML
     private Text title;
 
+    //object for check device type
     private final List<Device> devices = List.of(
             new Device("sound", DeviceType.SOUND),
             new Device("microphone", DeviceType.SOUND),
@@ -57,23 +58,22 @@ public class DevicesController implements Initializable {
 
     );
 
-    String vParentName = "Parent name:";
-    String vChildName = "Child name:";
+    private String vParentName = "Parent name:";
+    private String vChildName = "Child name:";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu menu = new Menu();
-        menu.create(devicesController);
-
-        SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hw = si.getHardware();
-        Timer timer = new Timer();
-
-
         devicesController.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+            //if for prevent wrong loading of elements
+
             if (newScene != null) {
 
+                //create sidebar for app
+                Menu menu = new Menu();
+                menu.create(devicesController);
+
+                //pass container for function sidebar
                 devicesController.getScene().setUserData(devicesController);
 
                 LanguageHandler languageHandler = new LanguageHandler();
@@ -82,12 +82,18 @@ public class DevicesController implements Initializable {
 
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
+                SystemInfo si = new SystemInfo();
+                HardwareAbstractionLayer hw = si.getHardware();
+                Timer timer = new Timer();
+
+                //handling language values
                 if (language.equalsIgnoreCase("Czech")) {
                     title.setText(languageHandler.getLanguageValues().getDevices().getTitle());
                     vParentName = languageHandler.getLanguageValues().getDevices().getParentName();
                     vChildName = languageHandler.getLanguageValues().getDevices().getChildName();
                 }
 
+                //handle elements size
                 devicesController.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
                     Scene scene = devicesController.getScene();
                     double width = scene.getWidth();
@@ -100,13 +106,18 @@ public class DevicesController implements Initializable {
 
                 long interval = Utils.getInterval(configHandler);
 
+                //write data to statistics
                 if (configHandler.getSettingsFromConfig().isCollectStatisticData()) {
 
                     FileWriter writer;
 
+                    String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+                    File customDir = new File(path);
+                    File statisticsFile = new File(customDir.getAbsolutePath() + "/statistics.txt");
+
                     try {
-                        writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/statistics.txt").toURI()).toFile());
-                    } catch (IOException | URISyntaxException e) {
+                        writer = new FileWriter(statisticsFile);
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
 
@@ -126,9 +137,13 @@ public class DevicesController implements Initializable {
 
                 FileWriter writer2;
 
+                String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+                File customDir = new File(path);
+                File logsFile = new File(customDir.getAbsolutePath() + "/logs.txt");
+
                 try {
-                    writer2 = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-                } catch (IOException | URISyntaxException e) {
+                    writer2 = new FileWriter(logsFile);
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
 
@@ -144,6 +159,11 @@ public class DevicesController implements Initializable {
 
     }
 
+    /**
+     * this method write logs to file
+     * @param writer - pass writer for write to file
+     * @param hw - get hw objects
+     */
     private void writeLogs(FileWriter writer, HardwareAbstractionLayer hw) {
 
         try {
@@ -167,12 +187,17 @@ public class DevicesController implements Initializable {
         }
     }
 
+    /**
+     * this method map all devices and display them for user in scroll view
+     * @param hw - get hw objects
+     */
     private void createDevicesView(HardwareAbstractionLayer hw) {
 
         for (UsbDevice usbDevice : hw.getUsbDevices(true)) {
             for (UsbDevice usbDevice1 : usbDevice.getConnectedDevices()) {
                 for (UsbDevice usbDevice2 : usbDevice1.getConnectedDevices()) {
                     for (UsbDevice usbDevice3 : usbDevice2.getConnectedDevices()) {
+                        //display settings
                         VBox vBox = new VBox();
                         vBox.setAlignment(Pos.CENTER);
                         Text text = new Text(vParentName + " " + usbDevice3.getName());
@@ -189,6 +214,7 @@ public class DevicesController implements Initializable {
                                 deviceType = device.getDeviceType();
                             }
                         }
+                        //create image
                         try {
                             if (deviceType.equals(DeviceType.MOUSE)) {
                                 image = new Image(getClass().getResource("/ocel23/me/ochealth/images/mouseIcon.png").toURI().toString());
@@ -202,6 +228,7 @@ public class DevicesController implements Initializable {
                         } catch (URISyntaxException e) {
                             throw new RuntimeException(e);
                         }
+                        //display settings
                         ImageView imageView = new ImageView(image);
                         imageView.setFitHeight(320);
                         imageView.setFitWidth(320);

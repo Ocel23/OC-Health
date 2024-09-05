@@ -17,11 +17,10 @@ import org.controlsfx.control.Notifications;
 import oshi.SystemInfo;
 import oshi.hardware.*;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -66,10 +65,12 @@ public class PowerSourceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
         powerSourceContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(powerSourceContainer);
 
@@ -77,8 +78,10 @@ public class PowerSourceController implements Initializable {
                 HardwareAbstractionLayer hw = si.getHardware();
                 Timer timer = new Timer();
 
+                //pass container for function sidebar
                 powerSourceContainer.getScene().setUserData(powerSourceContainer);
 
+                //handling language values
                 LanguageHandler languageHandler = new LanguageHandler();
                 ConfigHandler configHandler = new ConfigHandler();
                 String language = configHandler.getSettingsFromConfig().getLanguage();
@@ -93,6 +96,7 @@ public class PowerSourceController implements Initializable {
                 String [] text = finalVTitle.split(" ");
                 title.setText(text[0]);
 
+                //change elements by screen width
                 powerSourceContainer.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
                     Scene scene = powerSourceContainer.getScene();
 
@@ -119,6 +123,7 @@ public class PowerSourceController implements Initializable {
 
                 List<PowerSource> powerSource = hw.getPowerSources();
 
+                //update battery data values
                 timer.schedule(new TimerTask() {
 
                     @Override
@@ -132,6 +137,13 @@ public class PowerSourceController implements Initializable {
 
     }
 
+    /**
+     * this method get battery data, update them and display them for user
+     * @param languageHandler
+     * @param language
+     * @param powerSource
+     * @param configHandler
+     */
     private void getBatteryData(LanguageHandler languageHandler, String language, List<PowerSource> powerSource, ConfigHandler configHandler) {
         String vCapacity = "Capacity:";
         String vPowerUsageRate = "Power usage rate:";
@@ -187,11 +199,16 @@ public class PowerSourceController implements Initializable {
                 batteryFill.setFill(Color.web("#ff3300"));
             }
 
+            //write data to logs file
             FileWriter writer;
 
+            String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+            File customDir = new File(path);
+            File logsFile = new File(customDir.getAbsolutePath() + "/logs.txt");
+
             try {
-                writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-            } catch (IOException | URISyntaxException e) {
+                writer = new FileWriter(logsFile);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 

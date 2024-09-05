@@ -6,9 +6,10 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TagInspector;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
+/**
+ * This class handle config, set and get to config
+ */
 public class ConfigHandler {
 
     private Yaml config;
@@ -23,17 +24,27 @@ public class ConfigHandler {
         TagInspector tagInspector = tag -> tag.getClassName().equalsIgnoreCase(Settings.class.getName());
         loaderOptions.setTagInspector(tagInspector);
         config = new Yaml(new Constructor(Settings.class, loaderOptions));
-        InputStream inputStream = getClass().getResourceAsStream("/ocel23/me/ochealth/config.yaml");
-
+        String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+        File customDir = new File(path);
+        File configFile = new File(customDir.getAbsolutePath() + "/config.yaml");
+        InputStream inputStream;
+        try {
+            inputStream = new FileInputStream(configFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return config.load(inputStream);
     }
 
     public void setSettingsToConfig(Settings settings) {
         config = new Yaml();
         PrintWriter printWriter;
+        String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+        File customDir = new File(path);
+        File configFile = new File(customDir.getAbsolutePath() + "/config.yaml");
         try {
-            printWriter = new PrintWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/config.yaml").toURI()).toFile());
-        } catch (FileNotFoundException | URISyntaxException e) {
+            printWriter = new PrintWriter(configFile);
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         config.dump(settings, printWriter);

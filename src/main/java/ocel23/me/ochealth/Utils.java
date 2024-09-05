@@ -4,6 +4,11 @@ import ocel23.me.ochealth.fileHandlers.ConfigHandler;
 
 public class Utils {
 
+    /**
+     * this method return interval for saving statistics by string values from config
+     * @param configHandler - config help class
+     * @return interval of saving statistics
+     */
     public static long getInterval(ConfigHandler configHandler) {
 
         String intervalValue = configHandler.getSettingsFromConfig().getCollectStatisticsDataInterval();

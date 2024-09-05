@@ -1,7 +1,11 @@
 package ocel23.me.ochealth.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import oshi.software.os.OSProcess;
 
+@Getter
+@AllArgsConstructor
 public class Process {
 
     private String name;
@@ -9,26 +13,4 @@ public class Process {
     private String memoryUsage;
     private OSProcess.State processState;
 
-    public Process(String name, String  cpuUsage, String memoryUsage, OSProcess.State processState) {
-        this.cpuUsage = cpuUsage;
-        this.name = name;
-        this.memoryUsage = memoryUsage;
-        this.processState = processState;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCpuUsage() {
-        return cpuUsage;
-    }
-
-    public String getMemoryUsage() {
-        return memoryUsage;
-    }
-
-    public OSProcess.State getProcessState() {
-        return processState;
-    }
 }

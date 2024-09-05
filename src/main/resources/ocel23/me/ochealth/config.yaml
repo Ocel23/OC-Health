@@ -1,6 +1,0 @@
-defaultSectionOnStart: Home
-collectStatisticData: true
-collectStatisticsDataInterval: "1 minute"
-showNotificationOnWarningValues: false
-language: English
-enableLogging: true

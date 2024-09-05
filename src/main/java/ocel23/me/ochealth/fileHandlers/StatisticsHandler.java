@@ -3,10 +3,9 @@ package ocel23.me.ochealth.fileHandlers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ocel23.me.ochealth.models.Statistics;
-import ocel23.me.ochealth.models.statisticsModels.HardwareInfo;
-import ocel23.me.ochealth.models.statisticsModels.NetworkInfo;
+import ocel23.me.ochealth.models.statisticsModels.*;
 import ocel23.me.ochealth.models.statisticsModels.PowerSource;
-import ocel23.me.ochealth.models.statisticsModels.SoftwareInfo;
+import ocel23.me.ochealth.models.statisticsModels.another.Firmware;
 import ocel23.me.ochealth.models.statisticsModels.hardwareInfo.GraphicCard;
 import ocel23.me.ochealth.models.statisticsModels.hardwareInfo.Memory;
 import ocel23.me.ochealth.models.statisticsModels.hardwareInfo.Processor;
@@ -20,10 +19,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handle creating files from statistics
+ */
 public class StatisticsHandler {
 
+    /**
+     * this method handle create of json file
+     * @param filePath - path to file
+     */
     public void createJsonDataFile(String filePath) {
-
 
         Statistics statistics = getStatisticsData();
 
@@ -42,6 +47,10 @@ public class StatisticsHandler {
 
     }
 
+    /**
+     * this method handle create of yaml file
+     * @param filePath - path to file
+     */
     public void createYamlDataFile(String filePath) {
 
         Statistics statistics = getStatisticsData();
@@ -61,6 +70,10 @@ public class StatisticsHandler {
 
     }
 
+    /**
+     * this method handle create of text file
+     * @param filePath - path to file
+     */
     public void createTextDataFile(String filePath) {
 
         Statistics statistics = getStatisticsData();
@@ -86,8 +99,13 @@ public class StatisticsHandler {
 
     }
 
+    /**
+     * this method get statistics data from all oshi components which are used in app and can have good statistics
+     * @return statistics data
+     */
     private Statistics getStatisticsData() {
         SystemInfo systemInfo = new SystemInfo();
+        HardwareAbstractionLayer hardware = systemInfo.getHardware();
         GraphicsCard graphicsCard = systemInfo.getHardware().getGraphicsCards().get(0);
         CentralProcessor centralProcessor = systemInfo.getHardware().getProcessor();
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
@@ -97,7 +115,8 @@ public class StatisticsHandler {
                 centralProcessor.getProcessorIdentifier().getName(),
                 centralProcessor.getProcessorIdentifier().getVendor(),
                 (int) centralProcessor.getCurrentFreq()[0],
-                centralProcessor.getPhysicalProcessorCount()
+                centralProcessor.getPhysicalProcessorCount(),
+                centralProcessor.getProcessorIdentifier().getMicroarchitecture()
         );
         GraphicCard graphicCard = new GraphicCard(
                 graphicsCard.getName(),
@@ -132,22 +151,22 @@ public class StatisticsHandler {
         );
         NetworkParams networkParams = operatingSystem.getNetworkParams();
         NetworkIF networkIF = systemInfo.getHardware().getNetworkIFs().get(0);
-        String ipv4 = "";
+        StringBuilder ipv4 = new StringBuilder();
         for (int j = 0; j < networkIF.getIPv4addr().length; j++) {
-            ipv4 += networkIF.getIPv4addr()[j];
+            ipv4.append(networkIF.getIPv4addr()[j]);
             if (j == networkIF.getIPv4addr().length - 1) continue;
-            ipv4 += ",";
+            ipv4.append(",");
         }
 
-        String ipv6 = "";
+        StringBuilder ipv6 = new StringBuilder();
         for (int k = 0; k < networkIF.getIPv6addr().length; k++) {
-            ipv6 += networkIF.getIPv6addr()[k];
+            ipv6.append(networkIF.getIPv6addr()[k]);
             if (k == networkIF.getIPv6addr().length - 1) continue;
-            ipv6 += ",";
+            ipv6.append(",");
         }
         NetworkInfo networkInfo = new NetworkInfo(
-                ipv4,
-                ipv6,
+                ipv4.toString(),
+                ipv6.toString(),
                 networkIF.getMacaddr(),
                 networkParams.getIpv4DefaultGateway(),
                 networkParams.getIpv6DefaultGateway(),
@@ -168,8 +187,17 @@ public class StatisticsHandler {
                 powerSources.get(0).getManufacturer()
         );
 
-        Statistics statistics = new Statistics(hardwareInfo, softwareInfo, networkInfo, powerSource);
-
-        return statistics;
+        oshi.hardware.Firmware firmware2 = hardware.getComputerSystem().getFirmware();
+        Firmware firmware = new Firmware(
+                firmware2.getName(),
+                firmware2.getDescription(),
+                firmware2.getManufacturer(),
+                firmware2.getReleaseDate(),
+                firmware2.getVersion()
+        );
+        SoundCard soundCard = hardware.getSoundCards().get(0);
+        ocel23.me.ochealth.models.statisticsModels.another.SoundCard soundCard1 = new ocel23.me.ochealth.models.statisticsModels.another.SoundCard(soundCard.getName(), soundCard.getDriverVersion(), soundCard.getCodec());
+        Another another = new Another(firmware, soundCard1);
+        return new Statistics(hardwareInfo, softwareInfo, networkInfo, powerSource, another);
     }
 }

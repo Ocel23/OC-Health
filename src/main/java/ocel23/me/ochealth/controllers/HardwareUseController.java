@@ -24,11 +24,10 @@ import oshi.hardware.GlobalMemory;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -87,8 +86,10 @@ public class HardwareUseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         useContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(useContainer);
 
@@ -99,12 +100,14 @@ public class HardwareUseController implements Initializable {
                 FileSystem fs = si.getOperatingSystem().getFileSystem();
                 List<OSFileStore> fileStores = fs.getFileStores();
 
+                //pass container for function sidebar
                 useContainer.getScene().setUserData(useContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
 
                 ConfigHandler configHandler = new ConfigHandler();
 
+                //handling language values
                 String vTitle = "HARDWARE USE";
 
                 if (configHandler.getSettingsFromConfig().getLanguage().equalsIgnoreCase("Czech")) {
@@ -113,6 +116,7 @@ public class HardwareUseController implements Initializable {
 
                 String finalVTitle = vTitle;
 
+                //map disks
                 for (OSFileStore fileStore : fileStores) {
                     if (fileStore.getDescription().equalsIgnoreCase("Fixed drive")) {
                         VBox disk = getDisk(fileStore);
@@ -124,6 +128,7 @@ public class HardwareUseController implements Initializable {
                 String [] text = vTitle.split(" ");
                 useTitle.setText(text[0]);
 
+                //change elements by screen width
                 useContainer.getScene().widthProperty().addListener((observableValue1, oldValue, newValue) -> {
                     Scene scene = useContainer.getScene();
                     double width = scene.getWidth();
@@ -206,6 +211,7 @@ public class HardwareUseController implements Initializable {
                 long maxFreq = cpu.getMaxFreq();
                 double maxFreqConverted = (double) maxFreq / 1000000000;
 
+                //timer for update values of hw components and display them for user
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -228,15 +234,20 @@ public class HardwareUseController implements Initializable {
                         double currentFreqConverted = (double) currentFreq[0] / 1000000000;
                         cpuUsageValue.setText(currentFreqConverted + "/" + maxFreqConverted + "GHz");
 
+                        //write data to logs file
                         FileWriter writer;
 
+                        String path = System.getProperty("user.home") + File.separator + "Oc-Health";
+                        File customDir = new File(path);
+                        File logsFile = new File(customDir.getAbsolutePath() + "/logs.txt");
 
                         try {
-                            writer = new FileWriter(Paths.get(getClass().getResource("/ocel23/me/ochealth/logs.txt").toURI()).toFile());
-                        } catch (IOException | URISyntaxException e) {
+                            writer = new FileWriter(logsFile);
+                        } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
 
+                        //ifs for showings warnings notifications
                         if (cpuUsage > 80) {
                             if (configHandler.getSettingsFromConfig().isShowNotificationOnWarningValues()) {
                                 Platform.runLater(() -> {
@@ -283,6 +294,11 @@ public class HardwareUseController implements Initializable {
 
     }
 
+    /**
+     * this method make one disk and display it for user
+     * @param fileStore - object for get one disk
+     * @return VBox - container
+     */
     private VBox getDisk(OSFileStore fileStore) {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);

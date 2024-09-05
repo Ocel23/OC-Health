@@ -11,7 +11,6 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
 import ocel23.me.ochealth.fileHandlers.LanguageHandler;
@@ -62,9 +61,11 @@ public class SideBarController implements Initializable {
     @FXML
     private Button subSettings;
 
+    //all method handle switch between scenes
     public void switchToHardwareUseScene(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUse.fxml"));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        //first three lines of code are needed for preserve same width between scenes
         Scene scene1 = ((Node) e.getSource()).getScene();
         scene = new Scene(root, scene1.getWidth(), scene1.getHeight());
         stage.setScene(scene);
@@ -192,7 +193,7 @@ public class SideBarController implements Initializable {
             String vNetworkUse = "Use";
             String vNetworkInfo = "Information";
             String vPowerSourceInfoAndUse = "Information and Use";
-            String vSubSettings = "Settings use";
+            String vSubSettings = "Settings";
             String vAnotherInfo = "Another use";
             String vDevicesInfo = "Information";
             String vSoftwareInfo = "Information";

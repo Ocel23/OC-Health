@@ -53,20 +53,24 @@ public class AnotherComponentsController implements Initializable {
 
         anotherContainer.sceneProperty().addListener(((observableValue, oldScene, newScene) -> {
 
+            //if for prevent wrong loading of elements
             if (newScene != null) {
 
+                //create sidebar for app
                 Menu menu = new Menu();
                 menu.create(anotherContainer);
 
                 SystemInfo si = new SystemInfo();
                 HardwareAbstractionLayer hw = si.getHardware();
 
+                //pass container for function sidebar
                 anotherContainer.getScene().setUserData(anotherContainer);
 
                 LanguageHandler languageHandler = new LanguageHandler();
 
                 ConfigHandler configHandler = new ConfigHandler();
 
+                //handling language values
                 String language = configHandler.getSettingsFromConfig().getLanguage();
 
                 String vTitle = "ANOTHER COMPONENTS";
@@ -95,6 +99,7 @@ public class AnotherComponentsController implements Initializable {
                 title.setText(text2[0]);
 
                 String finalVTitle = vTitle;
+                //change elements by screen width
                 anotherContainer.getScene().widthProperty().addListener((observableValue1, number, t1) -> {
                     Scene scene = anotherContainer.getScene();
                     double width = scene.getWidth();
@@ -118,6 +123,7 @@ public class AnotherComponentsController implements Initializable {
                     }
                 });
 
+                //set values for texts
                 Firmware firmware = hw.getComputerSystem().getFirmware();
                 firmwareName.setText(vFirmwareName + " " + firmware.getName());
                 firmwareDescription.setText(vFirmwareDescription + " " + firmware.getDescription());
