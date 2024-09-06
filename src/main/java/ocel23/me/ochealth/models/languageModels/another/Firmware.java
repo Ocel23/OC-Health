@@ -3,9 +3,10 @@ package ocel23.me.ochealth.models.languageModels.another;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 public class Firmware {
 

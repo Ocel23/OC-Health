@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-@AllArgsConstructor
+
 public class Statistics implements Serializable {
 
     private HardwareInfo hardwareInfo;
@@ -18,4 +18,11 @@ public class Statistics implements Serializable {
     private PowerSource powerSource;
     private Another another;
 
+    public Statistics(HardwareInfo hardwareInfo, SoftwareInfo softwareInfo, NetworkInfo networkInfo, PowerSource powerSource, Another another) {
+        this.hardwareInfo = hardwareInfo;
+        this.softwareInfo = softwareInfo;
+        this.networkInfo = networkInfo;
+        this.powerSource = powerSource;
+        this.another = another;
+    }
 }

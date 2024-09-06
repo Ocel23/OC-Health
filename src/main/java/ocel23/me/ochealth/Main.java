@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ocel23.me.ochealth.fileHandlers.ConfigHandler;
@@ -53,7 +54,7 @@ public class Main extends Application {
             } else if (section.equalsIgnoreCase("HardwareInfo")){
                 root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareInfo.fxml"));
             } else if (section.equalsIgnoreCase("HardwareUse")) {
-                root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUse.fxml.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/HardwareUse.fxml"));
             } else if (section.equalsIgnoreCase("Another")) {
                 root = FXMLLoader.load(getClass().getResource("/ocel23/me/ochealth/views/AnotherComponents.fxml"));
             } else if (section.equalsIgnoreCase("NetworkInfo")) {
@@ -87,6 +88,7 @@ public class Main extends Application {
             */
 
             primaryStage.setTitle("OC Health");
+            primaryStage.getIcons().add(new Image(getClass().getResource("/ocel23/me/ochealth/images/logo-oc-health.jpg").openStream()));
             primaryStage.setScene(scene);
             primaryStage.show();
 
